@@ -1,0 +1,15 @@
+{
+  "name": "Rubrik API Capture",
+  "short_name": "Your Extension Name",
+  "author": "Drew Russell <@drusse11>",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "43",
+  "devtools_page": "index.html",
+  "icons": {
+    "16": "favicon.ico",
+    "48": "logo192.png",
+    "128": "logo512.png"
+  },
+  "permissions": ["tabs", "http://*/*", "https://*/*"]
+}
