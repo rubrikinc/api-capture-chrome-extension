@@ -25,7 +25,9 @@ function createPanel() {
 
           ReactDOM.render(
             <StylesProvider jss={jss}>
-              <DevToolsPanel />
+              <DevToolsPanel
+                networkRequest={chrome.devtools.network.onRequestFinished}
+              />
             </StylesProvider>,
             panelWindow.document.getElementById("root")
           );
