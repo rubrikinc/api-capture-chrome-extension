@@ -26,6 +26,8 @@ const helperApiCalls = [
   "/v1/cluster/me",
   "/v1/cluster/me/version",
   "/v1/blackout_window",
+  "/v1/event/latest?limit=15",
+  "/internal/authorization/effective/roles?principal",
 ];
 
 export default class DevToolsPanel extends React.Component {
@@ -40,7 +42,6 @@ export default class DevToolsPanel extends React.Component {
 
   handleNetworkRequest = (request) => {
     let isRubrikApiCall = false;
-
     for (const header of request.request.headers) {
       // toLowerCase in order to support pre CDM 5.2
       if (header["name"].toLowerCase() === "rk-web-app-request") {
@@ -53,25 +54,29 @@ export default class DevToolsPanel extends React.Component {
     // Before logging -- validate the API calls originated from Rubrik
     // and is not in the helperApiCalls list
     if (isRubrikApiCall && !helperApiCalls.includes(path)) {
-      request.getContent((content, encoding) => {
-        this.setState({
-          apiCalls: [
-            ...this.state.apiCalls,
-            {
-              id: this.state.apiCalls.length + 1,
-              status: request.response.status,
-              httpMethod: request.request.method,
-              path: path,
-              responseTime: request.time,
-              responseBody: JSON.parse(content),
-              requestBody:
-                request.request.bodySize !== 0
-                  ? JSON.parse(request.request.postData.text)
-                  : null,
-            },
-          ],
+      // Add another layer of more generic checks for endpoints that have may
+      // cluster specific variables included
+      if (!path.includes("User")) {
+        request.getContent((content, encoding) => {
+          this.setState({
+            apiCalls: [
+              ...this.state.apiCalls,
+              {
+                id: this.state.apiCalls.length + 1,
+                status: request.response.status,
+                httpMethod: request.request.method,
+                path: path,
+                responseTime: request.time,
+                responseBody: JSON.parse(content),
+                requestBody:
+                  request.request.bodySize !== 0
+                    ? JSON.parse(request.request.postData.text)
+                    : null,
+              },
+            ],
+          });
         });
-      });
+      }
     }
   };
 
