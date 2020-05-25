@@ -18,7 +18,6 @@ const borderRadius = "0.286rem";
 const ApiSuccess = withStyles({
   root: {
     borderRight: `${borderSize} ${borderSuccessColor}`,
-    borderRadius: `${borderRadius}`,
   },
   content: {},
   expanded: {},
@@ -27,7 +26,6 @@ const ApiSuccess = withStyles({
 const ApiError = withStyles({
   root: {
     borderRight: `${borderSize} ${borderErrorColor}`,
-    borderRadius: `${borderRadius}`,
   },
   content: {},
   expanded: {},
@@ -45,8 +43,6 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "5%",
   },
 }));
-
-function createPanels() {}
 
 export default function Panel({
   id,
