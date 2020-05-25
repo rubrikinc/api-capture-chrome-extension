@@ -112,20 +112,19 @@ export default function Panel({
             </ApiSuccess>
             <ApiSuccessPanelDetails>
               <section class="bodies-container">
-                <div class="request-body-left">
-                  <div class={"request-header"}>Request Body</div>
-                  <div>
-                    {requestBody !== null ? (
+                {requestBody != null ? (
+                  <div class="request-body-left">
+                    <div class={"request-header"}>Request Body</div>
+                    <div>
                       <SyntaxHighlighter language="json" style={githubGist}>
                         {JSON.stringify(requestBody, null, 2)}
                       </SyntaxHighlighter>
-                    ) : (
-                      <InfoIcon style={{ color: "#90E5FF" }}>
-                        No request body available
-                      </InfoIcon>
-                    )}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div />
+                )}
+
                 <div class="response-body-right">
                   <div class={"request-header"}>Response Body</div>
                   <div>
