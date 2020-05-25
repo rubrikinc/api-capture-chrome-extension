@@ -31,17 +31,18 @@ export default class DevToolsPanel extends React.Component {
 
   handleNetworkRequest = (request) => {
     let isRubrikApiCall = false;
-    let path;
 
     for (const header of request.request.headers) {
-      if (header["name"] === "rk-web-app-request") {
+      // toLowerCase in order to support pre CDM 5.2
+      if (header["name"].toLowerCase() === "rk-web-app-request") {
         isRubrikApiCall = true;
-      }
-      if (header["name"] === ":path") {
-        path = header["value"].replace("/api", "");
       }
     }
 
+    let path = request.request.url.split("/api")[1];
+
+    // Before logging -- validate the API calls originated from Rubrik
+    // and is not in the helperApiCalls list
     if (isRubrikApiCall && !helperApiCalls.includes(path)) {
       request.getContent((content, encoding) => {
         this.setState({
@@ -59,7 +60,6 @@ export default class DevToolsPanel extends React.Component {
         });
       });
     }
-    console.log(this.state.apiCalls);
   };
 
   scrollToBottom = () => {
@@ -89,7 +89,7 @@ export default class DevToolsPanel extends React.Component {
             <div className="responseTime">Response Time&emsp;</div>
           </div>
         </div>
-        <div ref={(ref) => (this.newData = ref)}>
+        <div>
           {this.state.apiCalls.map((apiCall) => {
             return (
               <Panel
@@ -103,6 +103,7 @@ export default class DevToolsPanel extends React.Component {
             );
           })}
         </div>
+        {/* Div used as the bottom placeholder to scroll to */}
         <div
           style={{ float: "left", clear: "both" }}
           ref={this.scrollToBottomRef}
