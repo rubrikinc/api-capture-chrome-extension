@@ -11,12 +11,21 @@ const helperApiCalls = [
   "/internal/cluster/me/is_encrypted",
   "/internal/cluster/me/platforminfo",
   "/internal/cluster/me/ui_preference",
+  "/internal/cluster/me/ntp_server",
+  "/internal/cluster/me/name",
+  "/internal/cluster/me/ipmi",
   "/internal/cluster/log",
   "/internal/node_management/is_bootstrapped",
   "/internal/log",
   "/internal/cluster/me/security_classification",
   "/internal/config/crystal",
   "/internal/authorization/effective/for_resource",
+  "/internal/event?limit=15",
+  "/internal/user/me/organization",
+  "/internal/authorization/effective/for_resources",
+  "/v1/cluster/me",
+  "/v1/cluster/me/version",
+  "/v1/blackout_window",
 ];
 
 export default class DevToolsPanel extends React.Component {
@@ -56,7 +65,7 @@ export default class DevToolsPanel extends React.Component {
               responseTime: request.time,
               responseBody: JSON.parse(content),
               requestBody:
-                request.request.bodySize != 0
+                request.request.bodySize !== 0
                   ? JSON.parse(request.request.postData.text)
                   : null,
             },
