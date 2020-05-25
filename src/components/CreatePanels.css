@@ -91,3 +91,29 @@ body {
     padding-left: 45px;
   }
 }
+
+/*     Request and Response Bodies     */
+/* *********************************** */
+
+.bodies-container {
+  display: flex;
+  width: 100%;
+}
+
+.request-body-left {
+  flex: 1;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+.response-body-right {
+  flex: 1;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+.request-header {
+  text-transform: uppercase;
+  text-align: center;
+  color: rgb(108, 117, 118);
+}

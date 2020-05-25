@@ -8,7 +8,10 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const borderSize = "4px solid";
 const borderSuccessColor = "#09C997";
@@ -23,6 +26,15 @@ const ApiSuccess = withStyles({
   expanded: {},
 })(MuiExpansionPanelSummary);
 
+const ApiSuccessPanelDetails = withStyles({
+  root: {
+    borderRight: `${borderSize} ${borderSuccessColor}`,
+    borderTop: "1px solid RGBA(105, 115, 134, 0.2);",
+  },
+  content: {},
+  expanded: {},
+})(MuiExpansionPanelDetails);
+
 const ApiError = withStyles({
   root: {
     borderRight: `${borderSize} ${borderErrorColor}`,
@@ -30,6 +42,15 @@ const ApiError = withStyles({
   content: {},
   expanded: {},
 })(MuiExpansionPanelSummary);
+
+const ApiErrorPanelDetails = withStyles({
+  root: {
+    borderRight: `${borderSize} ${borderErrorColor}`,
+    borderTop: "1px solid RGBA(105, 115, 134, 0.2);",
+  },
+  content: {},
+  expanded: {},
+})(MuiExpansionPanelDetails);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -88,9 +109,25 @@ export default function Panel({
                 <div className="responseTime">{Math.round(responseTime)}ms</div>
               </div>
             </ApiSuccess>
-            <ExpansionPanelDetails>
-              <Typography color="textSecondary">{responseBody}</Typography>
-            </ExpansionPanelDetails>
+            <ApiSuccessPanelDetails>
+              <section class="bodies-container">
+                <div class="request-body-left">
+                  <div class={"request-header"}>Request Body</div>
+                </div>
+                <div class="response-body-right">
+                  <div class={"request-header"}>Response Body</div>
+                  <div>
+                    {responseBody != undefined ? (
+                      <SyntaxHighlighter language="json" style={githubGist}>
+                        {JSON.stringify(responseBody, null, 2)}
+                      </SyntaxHighlighter>
+                    ) : (
+                      "n/a"
+                    )}
+                  </div>
+                </div>
+              </section>
+            </ApiSuccessPanelDetails>
           </ExpansionPanel>
         </div>
       );
@@ -112,6 +149,26 @@ export default function Panel({
                 <div className="responseTime">{Math.round(responseTime)}ms</div>
               </div>
             </ApiError>
+            <ApiErrorPanelDetails>
+              <section class="bodies-container">
+                <div class="request-body-left">
+                  <div style={{ textAlign: "center" }}>Request Body</div>
+                </div>
+                <div class="response-body-right">
+                  <div style={{ textAlign: "center" }}>Response Body</div>
+                  <div>
+                    {responseBody ? (
+                      <SyntaxHighlighter
+                        language="json"
+                        style={githubGist}
+                      ></SyntaxHighlighter>
+                    ) : (
+                      "n/a"
+                    )}
+                  </div>
+                </div>
+              </section>
+            </ApiErrorPanelDetails>
           </ExpansionPanel>
         </div>
       );
