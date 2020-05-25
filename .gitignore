@@ -11,6 +11,9 @@
 # production
 /build
 
+# Mock User Interface
+/mock-ui
+
 # misc
 .DS_Store
 .env.local
@@ -21,3 +24,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/components/DevToolsPanel.js
