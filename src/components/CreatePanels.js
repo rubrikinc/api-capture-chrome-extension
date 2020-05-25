@@ -99,7 +99,7 @@ export default function Panel({
             expanded={expanded === `panel${id}`}
             onChange={handleChange(`panel${id}`)}
             className="panel-spacing"
-            defaultExpanded
+            TransitionProps={{ unmountOnExit: true }}
           >
             <ApiSuccess expandIcon={<ExpandMoreIcon />}>
               <div className="panel-container">
