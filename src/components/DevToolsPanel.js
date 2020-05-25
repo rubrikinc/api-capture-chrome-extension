@@ -30,7 +30,6 @@ export default class DevToolsPanel extends React.Component {
   scrollToBottomRef = React.createRef();
 
   handleNetworkRequest = (request) => {
-    console.log(request);
     let isRubrikApiCall = false;
 
     for (const header of request.request.headers) {
@@ -56,6 +55,10 @@ export default class DevToolsPanel extends React.Component {
               path: path,
               responseTime: request.time,
               responseBody: JSON.parse(content),
+              requestBody:
+                request.request.bodySize != 0
+                  ? JSON.parse(request.request.postData.text)
+                  : null,
             },
           ],
         });
@@ -99,6 +102,7 @@ export default class DevToolsPanel extends React.Component {
                 method={apiCall["httpMethod"]}
                 path={apiCall["path"]}
                 responseBody={apiCall["responseBody"]}
+                requestBody={apiCall["requestBody"]}
                 responseTime={apiCall["responseTime"]}
               />
             );
