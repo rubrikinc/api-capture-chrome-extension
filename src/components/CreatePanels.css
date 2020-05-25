@@ -8,22 +8,36 @@ body {
 .header-container {
   font-size: 0.857rem;
   display: flex;
-  color: rgb(108, 117, 118);
   font-weight: 400;
+  color: #697386;
 }
 
-/*       PANEL         */
+/*       LIST         */
 /* ******************* */
 
-.panel-container {
-  font-size: 0.786rem;
+.list-padding {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.list-container {
+  font-size: 0.886rem;
   display: flex;
+  color: #697386;
   flex-grow: 1;
 }
 
-.panel-spacing {
-  margin-top: 5px;
-  margin-bottom: 5px;
+.list-spacing {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.list-border-success {
+  border-right: 4px solid #09c997;
+}
+
+.list-border-error {
+  border-right: 4px solid #ed4c59;
 }
 
 /*    REQUEST TYPE     */
@@ -31,7 +45,7 @@ body {
 .requestMethod {
   width: 100px;
   text-align: left;
-  padding-right: 15px;
+  padding-right: 10px;
   text-transform: uppercase;
 }
 
@@ -61,11 +75,10 @@ body {
 .endpoint {
   flex-grow: 3;
   text-align: left;
-  padding-left: 5px;
-  /* font-family: Menlo, Consolas, monospace; */
   font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter,
     monospace;
   font-weight: 500;
+  flex-basis: 100%;
 }
 
 /*     Response Time     */
