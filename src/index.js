@@ -10,7 +10,6 @@ import rtl from "jss-rtl";
 let alreadyShown = false;
 
 function createPanel() {
-  const theme = chrome.devtools.panels.themeName || "default";
   chrome.devtools.panels.create(
     "Rubrik",
     "./icons/icon48.png",
