@@ -30,7 +30,7 @@ export default function Panel({
   ) {
     console.log(endpoint);
     return (
-      <div id={id} class="list-padding">
+      <div class="list-padding">
         <Paper>
           <List
             component="nav"
@@ -42,7 +42,7 @@ export default function Panel({
             }
           >
             <ListItem
-              id={id}
+              key={id}
               button
               onClick={(e) => {
                 console.log(e.currentTarget.id);
