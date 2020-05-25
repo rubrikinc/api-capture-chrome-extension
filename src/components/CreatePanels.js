@@ -129,17 +129,18 @@ export default function Panel({
                 <div class="response-body-right">
                   <div class={"request-header"}>Response Body</div>
                   <div>
-                  <div>
-                    {requestBody !== undefined ? (
-                      <SyntaxHighlighter language="json" style={githubGist}>
-                        {JSON.stringify(responseBody, null, 2)}
-                      </SyntaxHighlighter>
-                    ) : (
-                      <InfoIcon style={{ color: "#90E5FF" }}>
-                        No request body available
-                      </InfoIcon>
-                    )}
-                 </div>
+                    <div>
+                      {requestBody !== undefined ? (
+                        <SyntaxHighlighter language="json" style={githubGist}>
+                          {JSON.stringify(responseBody, null, 2)}
+                        </SyntaxHighlighter>
+                      ) : (
+                        <InfoIcon style={{ color: "#90E5FF" }}>
+                          No request body available
+                        </InfoIcon>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </section>
             </ApiSuccessPanelDetails>
