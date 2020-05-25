@@ -18,12 +18,12 @@ body {
 .panel-container {
   font-size: 0.786rem;
   display: flex;
-  color: #697386;
   flex-grow: 1;
 }
 
 .panel-spacing {
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /*    REQUEST TYPE     */
