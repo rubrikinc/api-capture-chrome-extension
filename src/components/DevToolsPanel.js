@@ -35,7 +35,9 @@ export default class DevToolsPanel extends React.Component {
     super(props);
     this.state = {
       apiCalls: [],
+      showRequestBody: false,
     };
+    this.handleShowRequestBody = this.handleShowRequestBody.bind(this);
   }
 
   scrollToBottomRef = React.createRef();
@@ -92,6 +94,12 @@ export default class DevToolsPanel extends React.Component {
     this.scrollToBottom();
   }
 
+  handleShowRequestBody() {
+    this.setState({
+      showRequestBody: true,
+    });
+  }
+
   static propTypes = {
     networkRequest: React.PropTypes.object.isRequired,
   };
@@ -118,6 +126,7 @@ export default class DevToolsPanel extends React.Component {
                 responseBody={apiCall["responseBody"]}
                 requestBody={apiCall["requestBody"]}
                 responseTime={apiCall["responseTime"]}
+                showRequestBody={this.handleShowRequestBody}
               />
             );
           })}

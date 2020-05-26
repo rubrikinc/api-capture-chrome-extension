@@ -5,8 +5,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Paper from "@material-ui/core/Paper";
 
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
+// import SyntaxHighlighter from "react-syntax-highlighter";
+// import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export default function Panel({
   id,
@@ -16,6 +16,7 @@ export default function Panel({
   responseBody,
   requestBody,
   responseTime,
+  showRequestBody,
 }) {
   const httpSuccessCodes = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
@@ -31,13 +32,7 @@ export default function Panel({
               : "list-border-error list-spacing"
           }
         >
-          <ListItem
-            key={id}
-            button
-            onClick={(e) => {
-              console.log(e.currentTarget.id);
-            }}
-          >
+          <ListItem key={id} button onClick={showRequestBody}>
             <div class="list-container list-spacing">
               <div className={`requestMethod ${method.toLowerCase()}`}>
                 {method}
