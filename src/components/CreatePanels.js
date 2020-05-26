@@ -19,56 +19,35 @@ export default function Panel({
 }) {
   const httpSuccessCodes = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
-  function createApiPanel(
-    id,
-    status,
-    method,
-    endpoint,
-    responseBody,
-    requestBody,
-    responseTime
-  ) {
-    console.log(endpoint);
-    return (
-      <div class="list-padding">
-        <Paper>
-          <List
-            component="nav"
-            dense={true}
-            class={
-              httpSuccessCodes.includes(status)
-                ? "list-border-success list-spacing"
-                : "list-border-error list-spacing"
-            }
+  return (
+    <div class="list-padding">
+      <Paper>
+        <List
+          component="nav"
+          dense={true}
+          class={
+            httpSuccessCodes.includes(status)
+              ? "list-border-success list-spacing"
+              : "list-border-error list-spacing"
+          }
+        >
+          <ListItem
+            key={id}
+            button
+            onClick={(e) => {
+              console.log(e.currentTarget.id);
+            }}
           >
-            <ListItem
-              key={id}
-              button
-              onClick={(e) => {
-                console.log(e.currentTarget.id);
-              }}
-            >
-              <div class="list-container list-spacing">
-                <div className={`requestMethod ${method.toLowerCase()}`}>
-                  {method}
-                </div>
-                <div class="endpoint">{endpoint}</div>
-                <div class="responseTime">{Math.round(responseTime)}ms</div>
+            <div class="list-container list-spacing">
+              <div className={`requestMethod ${method.toLowerCase()}`}>
+                {method}
               </div>
-            </ListItem>
-          </List>
-        </Paper>
-      </div>
-    );
-  }
-
-  return createApiPanel(
-    id,
-    status,
-    method,
-    path,
-    responseBody,
-    requestBody,
-    responseTime
+              <div class="endpoint">{path}</div>
+              <div class="responseTime">{Math.round(responseTime)}ms</div>
+            </div>
+          </ListItem>
+        </List>
+      </Paper>
+    </div>
   );
 }
