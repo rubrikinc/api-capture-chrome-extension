@@ -62,8 +62,6 @@ export default function FullScreenDialog({
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
-  console.log("Full Screen Dialog");
-
   const handleClickOpen = () => {
     setOpen(true);
   };

@@ -99,10 +99,6 @@ export default class DevToolsPanel extends React.Component {
   }
 
   handleShowRequestBody(id, responseBody, requestBody) {
-    console.log("handleShowRequestBody");
-    console.log(id);
-    console.log(responseBody);
-    console.log(requestBody);
     this.setState({
       apiDialogContent: {
         id: id,
@@ -111,7 +107,6 @@ export default class DevToolsPanel extends React.Component {
       },
       showRequestBody: true,
     });
-    console.log(this.state.apiDialogContent);
   }
 
   handleCloseRequestBody() {
