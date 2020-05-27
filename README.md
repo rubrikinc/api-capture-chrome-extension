@@ -8,7 +8,7 @@
 
 # :hammer: Installation
 
-# Download the Extension 
+## Download the Extension 
 
 * Download the `rubrik-api-capture.zip` asset from the [Releases](https://github.com/rubrikinc/api-capture-chrome-extension/releases/latest) page
 * Unzip `rubrik-api-capture.zip` 
