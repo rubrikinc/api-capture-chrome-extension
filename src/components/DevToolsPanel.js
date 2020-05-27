@@ -3,7 +3,7 @@ import Panel from "./CreatePanels";
 import HeaderBar from "./AppBar";
 import "./DevToolsPanel.css";
 import "./CreatePanels.css";
-import FullScreenDialog from "./Dialog";
+import { FullScreenDialog } from "./Dialog";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
 const helperApiCalls = [
