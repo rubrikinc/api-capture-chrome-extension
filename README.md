@@ -1,10 +1,20 @@
-# Rubrik API Capture Code Extension
+# Rubrik API Capture Code Extension (BETA)
 
 # :hammer: Installation
 
-## Build the Extension
+# Download the Repository
 
 ```
+$ git git@github.com:rubrikinc/api-capture-chrome-extension.git
+```
+
+## Build the Extension
+
+_Note: These instructions assume you have `node.js` and `npm` installed_
+
+```
+$ cd ./api-capture-chrome-extension
+$ yarn install
 $ yarn build
 ```
 
