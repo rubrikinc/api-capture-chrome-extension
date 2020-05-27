@@ -8,30 +8,23 @@
 
 # :hammer: Installation
 
-# Download the Repository
+# Download the Extension 
 
-```
-$ git git@github.com:rubrikinc/api-capture-chrome-extension.git
-```
-
-## Build the Extension
-
-_Note: These instructions assume you have `node.js` and `npm` installed_
-
-```
-$ cd api-capture-chrome-extension/
-$ yarn install
-$ yarn build
-```
+* Download the `rubrik-api-capture.zip` asset from the [Releases](https://github.com/rubrikinc/api-capture-chrome-extension/releases/latest) page
+* Unzip `rubrik-api-capture.zip` 
 
 ## Load the Extension in Chrome
 
-1. Browse to `chrome://extensions/`
+1. In Chrome, Browse to `chrome://extensions`
 2. Toggle Developer Mode (top right)
 3. Select the `Load unpacked` button
-4. Select the `build` directory on this repository
+4. Select the `rubrik-api-capture` directory 
+
+You will now have a `Rubrik` tab in the Chrome DevToos.
 
 # :blue_book: Documentation
+
+
 
 # :muscle: How You Can Help
 
