@@ -1,5 +1,11 @@
 # Rubrik API Capture Code Extension (BETA)
 
+![Main API UI](https://user-images.githubusercontent.com/8610203/82976605-2527b180-9fa5-11ea-8826-9d5f6ee20315.png)
+
+![Response Body UI](https://user-images.githubusercontent.com/8610203/82976603-248f1b00-9fa5-11ea-9db5-43892426e718.png)
+
+
+
 # :hammer: Installation
 
 # Download the Repository
