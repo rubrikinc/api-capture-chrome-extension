@@ -1,7 +1,9 @@
 import React from "react";
 import Panel from "./CreatePanels";
+import HeaderBar from "./AppBar";
 import "./DevToolsPanel.css";
 import "./CreatePanels.css";
+import FullScreenDialog from "./Dialog";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
 const helperApiCalls = [
@@ -36,8 +38,10 @@ export default class DevToolsPanel extends React.Component {
     this.state = {
       apiCalls: [],
       showRequestBody: false,
+      apiDialogContent: { id: null, responseBody: null, requestBody: null },
     };
     this.handleShowRequestBody = this.handleShowRequestBody.bind(this);
+    this.handleCloseRequestBody = this.handleCloseRequestBody.bind(this);
   }
 
   scrollToBottomRef = React.createRef();
@@ -94,9 +98,25 @@ export default class DevToolsPanel extends React.Component {
     this.scrollToBottom();
   }
 
-  handleShowRequestBody() {
+  handleShowRequestBody(id, responseBody, requestBody) {
+    console.log("handleShowRequestBody");
+    console.log(id);
+    console.log(responseBody);
+    console.log(requestBody);
     this.setState({
+      apiDialogContent: {
+        id: id,
+        responseBody: responseBody,
+        requestBody: requestBody,
+      },
       showRequestBody: true,
+    });
+    console.log(this.state.apiDialogContent);
+  }
+
+  handleCloseRequestBody() {
+    this.setState({
+      showRequestBody: false,
     });
   }
 
@@ -107,6 +127,16 @@ export default class DevToolsPanel extends React.Component {
   render() {
     return (
       <>
+        <HeaderBar />
+        {this.state.showRequestBody ? (
+          <FullScreenDialog
+            key={this.state.apiDialogContent["id"]}
+            responseBody={this.state.apiDialogContent["responseBody"]}
+            requestBody={this.state.apiDialogContent["requestBody"]}
+            closeRequestBody={this.handleCloseRequestBody}
+          />
+        ) : null}
+
         <div class="panel-header-padding">
           <div className="header-container">
             <div className="requestMethodHeader">Method&emsp;</div>

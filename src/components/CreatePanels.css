@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(247, 250, 249);
+  background-color: RGBA(237, 239, 240, 1);
 }
 
 /*    PANEL AND HEADER CONTAINER     */
@@ -10,6 +10,7 @@ body {
   display: flex;
   font-weight: 400;
   color: #697386;
+  background-color: RGBA(237, 239, 240, 1);
 }
 
 /*       LIST         */
