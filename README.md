@@ -19,7 +19,7 @@ $ git git@github.com:rubrikinc/api-capture-chrome-extension.git
 _Note: These instructions assume you have `node.js` and `npm` installed_
 
 ```
-$ cd ./api-capture-chrome-extension
+$ cd api-capture-chrome-extension/
 $ yarn install
 $ yarn build
 ```
