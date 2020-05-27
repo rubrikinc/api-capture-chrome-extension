@@ -72,8 +72,6 @@ export const FullScreenDialog = React.memo(
       setValue(newValue);
     };
 
-    const renders = React.useRef(0);
-
     return (
       <div>
         <Dialog
