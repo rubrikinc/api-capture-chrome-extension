@@ -1,4 +1,4 @@
-# Rubrik API Capture Code Extension (BETA)
+# Rubrik API Capture Extension (BETA)
 
 ![Main API UI](https://user-images.githubusercontent.com/8610203/82976605-2527b180-9fa5-11ea-8826-9d5f6ee20315.png)
 
