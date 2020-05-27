@@ -84,7 +84,6 @@ export const FullScreenDialog = React.memo(
           TransitionComponent={Transition}
         >
           <AppBar className={classes.appBar} style={{ background: "#1DA1DC" }}>
-            {console.log(renders.current++)}
             <Toolbar variant="dense">
               <IconButton
                 edge="start"
