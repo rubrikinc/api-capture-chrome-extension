@@ -60,6 +60,16 @@ export default class DevToolsPanel extends React.Component {
     // Before logging -- validate the API calls originated from Rubrik
     // and is not in the helperApiCalls list
     if (isRubrikApiCall && !helperApiCalls.includes(path)) {
+      let httpMethod = request.request.method;
+
+      if (path.includes("graphql")) {
+        // override the default POST http method with either mutation or query
+        if (request.request.bodySize !== 0) {
+          request.request.postData.text.includes("mutation")
+            ? (httpMethod = "mutation")
+            : (httpMethod = "query");
+        }
+      }
       // Add another layer of more generic checks for endpoints that have may
       // cluster specific variables included
       if (!path.includes("User")) {
@@ -70,7 +80,7 @@ export default class DevToolsPanel extends React.Component {
               {
                 id: this.state.apiCalls.length + 1,
                 status: request.response.status,
-                httpMethod: request.request.method,
+                httpMethod: httpMethod,
                 path: path,
                 responseTime: request.time,
                 responseBody: JSON.parse(content),
