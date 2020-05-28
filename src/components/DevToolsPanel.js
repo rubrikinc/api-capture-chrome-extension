@@ -1,9 +1,10 @@
 import React from "react";
 import HeaderBar from "./AppBar";
-import { Panel } from "./CreatePanels";
-import { FullScreenDialog } from "./Dialog";
+import Panel from "./CreatePanels";
+import FullScreenDialog from "./Dialog";
 import "./DevToolsPanel.css";
 import "./CreatePanels.css";
+import { parse, print } from "graphql";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
 const helperApiCalls = [
@@ -77,18 +78,36 @@ export default class DevToolsPanel extends React.Component {
     // and is not in the helperApiCalls list
     if (isRubrikApiCall && !helperApiCalls.includes(path)) {
       let httpMethod = request.request.method;
+      let requestBody;
+      let isGraphQL = false;
 
-      if (path.includes("graphql")) {
-        // override the default POST http method with either mutation or query
-        if (request.request.bodySize !== 0) {
-          request.request.postData.text.includes("mutation")
-            ? (httpMethod = "mutation")
-            : (httpMethod = "query");
-        }
-      }
       // Add another layer of more generic checks for endpoints that have may
       // cluster specific variables included
+
       if (!path.includes("User")) {
+        if (request.request.bodySize !== 0) {
+          let requestBodyJSON = JSON.parse(request.request.postData.text);
+          requestBody = JSON.stringify(requestBodyJSON, null, 2);
+        } else {
+          requestBody = null;
+        }
+
+        if (path.includes("graphql")) {
+          // override the default POST http method with either mutation or query
+          if (request.request.bodySize !== 0) {
+            request.request.postData.text.includes("mutation")
+              ? (httpMethod = "mutation")
+              : (httpMethod = "query");
+          }
+
+          let ast = parse(JSON.parse(request.request.postData.text)["query"]);
+          try {
+            path = ast["definitions"][0]["name"]["value"];
+          } catch (error) {}
+          try {
+            requestBody = print(ast);
+          } catch (error) {}
+        }
         request.getContent((content, encoding) => {
           this.setState({
             apiCalls: [
@@ -100,10 +119,7 @@ export default class DevToolsPanel extends React.Component {
                 path: path,
                 responseTime: request.time,
                 responseBody: JSON.parse(content),
-                requestBody:
-                  request.request.bodySize !== 0
-                    ? JSON.parse(request.request.postData.text)
-                    : null,
+                requestBody: requestBody,
               },
             ],
           });
