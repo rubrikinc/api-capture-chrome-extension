@@ -24,3 +24,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 - Categorize GraphQL API calls as either a `QUERY` or a `MUTATION` ([Issue 3](https://github.com/rubrikinc/api-capture-chrome-extension/issues/3))
+- Add support for logging API calls from Polaris ([Issue 1](https://github.com/rubrikinc/api-capture-chrome-extension/issues/1))

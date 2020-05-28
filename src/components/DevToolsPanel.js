@@ -1,9 +1,9 @@
 import React from "react";
-import Panel from "./CreatePanels";
 import HeaderBar from "./AppBar";
+import { Panel } from "./CreatePanels";
+import { FullScreenDialog } from "./Dialog";
 import "./DevToolsPanel.css";
 import "./CreatePanels.css";
-import { FullScreenDialog } from "./Dialog";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
 const helperApiCalls = [
@@ -49,9 +49,25 @@ export default class DevToolsPanel extends React.Component {
   handleNetworkRequest = (request) => {
     let isRubrikApiCall = false;
     for (const header of request.request.headers) {
-      // toLowerCase in order to support pre CDM 5.2
-      if (header["name"].toLowerCase() === "rk-web-app-request") {
-        isRubrikApiCall = true;
+      // Check to see if the site is CDM
+      try {
+        // toLowerCase in order to support pre CDM 5.2
+        if (header["name"].toLowerCase() === "rk-web-app-request") {
+          isRubrikApiCall = true;
+        }
+      } catch (error) {
+        continue;
+      }
+
+      // Check to see if the site is Polaris
+      try {
+        if (header["name"] === ":authority") {
+          if (header["value"].includes("my.rubrik.com")) {
+            isRubrikApiCall = true;
+          }
+        }
+      } catch (error) {
+        continue;
       }
     }
 
