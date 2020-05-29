@@ -1,11 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -52,72 +48,77 @@ function TabPanel(props) {
     </div>
   );
 }
-export const FullScreenDialog = React.memo(
-  ({ key, responseBody, requestBody, closeRequestBody }) => {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
+export default function FullScreenDialog({
+  responseBody,
+  requestBody,
+  closeRequestBody,
+  requestVariables,
+}) {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
 
-    const handleClose = () => {
-      closeRequestBody();
-      setOpen(false);
-    };
+  const handleClose = () => {
+    closeRequestBody();
+    setOpen(false);
+  };
 
-    const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-    return (
-      <div>
-        <Dialog
-          disablePortal
-          fullScreen
-          open={open}
-          onClose={handleClose}
-          TransitionComponent={Transition}
-        >
-          <AppBar className={classes.appBar} style={{ background: "#1DA1DC" }}>
-            <Toolbar variant="dense">
-              <IconButton
-                edge="start"
-                color="inherit"
-                onClick={handleClose}
-                aria-label="close"
-              >
-                <CloseIcon />
-              </IconButton>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="simple tabs example"
-                indicatorColor="#000"
-              >
-                <Tab label="Response Body" />
-                <Tab label="Request Body" />
-              </Tabs>
-
-              {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              Copy
-            </Button> */}
-            </Toolbar>
-          </AppBar>
-          <TabPanel value={value} index={0}>
-            <SyntaxHighlighter language="json" style={githubGist}>
-              {JSON.stringify(responseBody, null, 2)}
-            </SyntaxHighlighter>
-          </TabPanel>
+  return (
+    <div>
+      <Dialog
+        disablePortal
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <AppBar className={classes.appBar} style={{ background: "#1DA1DC" }}>
+          <Toolbar variant="dense">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+              indicatorColor="#000"
+            >
+              <Tab label="Request Body" />
+              {requestVariables ? <Tab label="Request Variables" /> : null}
+              <Tab label="Response Body" />
+              {}
+            </Tabs>
+          </Toolbar>
+        </AppBar>
+        <TabPanel value={value} index={0}>
+          <SyntaxHighlighter language="json" style={githubGist}>
+            {requestBody}
+          </SyntaxHighlighter>
+        </TabPanel>
+        {requestVariables ? (
           <TabPanel value={value} index={1}>
             <SyntaxHighlighter language="json" style={githubGist}>
-              {JSON.stringify(requestBody, null, 2)}
+              {requestVariables}
             </SyntaxHighlighter>
           </TabPanel>
-        </Dialog>
-      </div>
-    );
-  }
-);
+        ) : null}
+        <TabPanel value={value} index={requestVariables ? 2 : 1}>
+          <SyntaxHighlighter language="json" style={githubGist}>
+            {JSON.stringify(responseBody, null, 2)}
+          </SyntaxHighlighter>
+        </TabPanel>
+      </Dialog>
+    </div>
+  );
+}
