@@ -7,7 +7,7 @@ import "./CreatePanels.css";
 import { parse, print } from "graphql";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
-const helperApiCalls = [
+const cdmBackgroundApiCalls = [
   "/internal/cluster/me/is_registered",
   "/internal/cluster/me/is_azure_cloud_only",
   "/internal/cluster/me/is_registered",
@@ -34,6 +34,13 @@ const helperApiCalls = [
   "/v1/saml/sso_status",
 ];
 
+const polarisBackgroundApiCalls = ["FeatureFlagQuery"];
+
+const combinedBackgroundApiCalls = [
+  ...cdmBackgroundApiCalls,
+  ...polarisBackgroundApiCalls,
+];
+
 export default class DevToolsPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +62,7 @@ export default class DevToolsPanel extends React.Component {
 
   shouldBeFilterd = (path) => {
     let shouldBeFiltered = false;
-    if (helperApiCalls.includes(path)) {
+    if (combinedBackgroundApiCalls.includes(path)) {
       shouldBeFiltered = true;
     }
 
@@ -154,7 +161,7 @@ export default class DevToolsPanel extends React.Component {
     } catch (error) {}
 
     // Before logging -- validate the API calls originated from Rubrik
-    // and is not in the helperApiCalls list
+    // and is not in the shouldBeFilterd list
     if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
       try {
         request.getContent((content, encoding) => {
