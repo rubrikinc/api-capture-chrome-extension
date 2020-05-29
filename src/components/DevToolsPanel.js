@@ -31,6 +31,7 @@ const helperApiCalls = [
   "/v1/blackout_window",
   "/v1/event/latest?limit=15",
   "/internal/authorization/effective/roles?principal",
+  "/v1/saml/sso_status",
 ];
 
 export default class DevToolsPanel extends React.Component {
@@ -39,7 +40,12 @@ export default class DevToolsPanel extends React.Component {
     this.state = {
       apiCalls: [],
       showRequestBody: false,
-      apiDialogContent: { id: null, responseBody: null, requestBody: null },
+      apiDialogContent: {
+        id: null,
+        responseBody: null,
+        requestBody: null,
+        requestVariables: null,
+      },
     };
     this.handleShowRequestBody = this.handleShowRequestBody.bind(this);
     this.handleCloseRequestBody = this.handleCloseRequestBody.bind(this);
@@ -65,8 +71,9 @@ export default class DevToolsPanel extends React.Component {
   handleNetworkRequest = (request) => {
     let isRubrikApiCall = false;
     let httpMethod = request.request.method;
-    let requestBody;
     let path;
+    let requestBody;
+    let requestVariables = null;
     for (const header of request.request.headers) {
       // Check to see if the site is CDM
       try {
@@ -127,9 +134,22 @@ export default class DevToolsPanel extends React.Component {
         try {
           path = ast["definitions"][0]["name"]["value"];
         } catch (error) {}
+
         try {
           requestBody = print(ast);
         } catch (error) {}
+
+        try {
+          requestVariables = JSON.parse(request.request.postData.text)[
+            "variables"
+          ];
+
+          requestVariables = JSON.stringify(requestVariables, null, 2);
+        } catch (error) {
+          // always return a non-null value. this is used down the line for logic
+          // processing
+          requestVariables = JSON.stringify("{}", null, 2);
+        }
       }
     } catch (error) {}
 
@@ -149,6 +169,7 @@ export default class DevToolsPanel extends React.Component {
                 responseTime: request.time,
                 responseBody: JSON.parse(content),
                 requestBody: requestBody,
+                requestVariables: requestVariables,
               },
             ],
           });
@@ -169,12 +190,13 @@ export default class DevToolsPanel extends React.Component {
     this.scrollToBottom();
   }
 
-  handleShowRequestBody(id, responseBody, requestBody) {
+  handleShowRequestBody(id, responseBody, requestBody, requestVariables) {
     this.setState({
       apiDialogContent: {
         id: id,
         responseBody: responseBody,
         requestBody: requestBody,
+        requestVariables: requestVariables,
       },
       showRequestBody: true,
     });
@@ -196,10 +218,10 @@ export default class DevToolsPanel extends React.Component {
         <HeaderBar />
         {this.state.showRequestBody ? (
           <FullScreenDialog
-            key={this.state.apiDialogContent["id"]}
             responseBody={this.state.apiDialogContent["responseBody"]}
             requestBody={this.state.apiDialogContent["requestBody"]}
             closeRequestBody={this.handleCloseRequestBody}
+            requestVariables={this.state.apiDialogContent["requestVariables"]}
           />
         ) : null}
 
@@ -223,6 +245,7 @@ export default class DevToolsPanel extends React.Component {
                 requestBody={apiCall["requestBody"]}
                 responseTime={apiCall["responseTime"]}
                 showRequestBody={this.handleShowRequestBody}
+                requestVariables={apiCall["requestVariables"]}
               />
             );
           })}

@@ -50,10 +50,10 @@ function TabPanel(props) {
 }
 
 export default function FullScreenDialog({
-  key,
   responseBody,
   requestBody,
   closeRequestBody,
+  requestVariables,
 }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -95,12 +95,10 @@ export default function FullScreenDialog({
               indicatorColor="#000"
             >
               <Tab label="Request Body" />
+              {requestVariables ? <Tab label="Request Variables" /> : null}
               <Tab label="Response Body" />
+              {}
             </Tabs>
-
-            {/* <Button autoFocus color="inherit" onClick={handleClose}>
-              Copy
-            </Button> */}
           </Toolbar>
         </AppBar>
         <TabPanel value={value} index={0}>
@@ -108,7 +106,14 @@ export default function FullScreenDialog({
             {requestBody}
           </SyntaxHighlighter>
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        {requestVariables ? (
+          <TabPanel value={value} index={1}>
+            <SyntaxHighlighter language="json" style={githubGist}>
+              {requestVariables}
+            </SyntaxHighlighter>
+          </TabPanel>
+        ) : null}
+        <TabPanel value={value} index={requestVariables ? 2 : 1}>
           <SyntaxHighlighter language="json" style={githubGist}>
             {JSON.stringify(responseBody, null, 2)}
           </SyntaxHighlighter>

@@ -14,11 +14,13 @@ export default function Panel({
   requestBody,
   responseTime,
   showRequestBody,
+  requestVariables,
 }) {
   const httpSuccessCodes = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
-  const handleClick = (id, responseBody, requestBody) => (event) =>
-    showRequestBody(id, responseBody, requestBody);
+  const handleClick = (id, responseBody, requestBody, requestVariables) => (
+    event
+  ) => showRequestBody(id, responseBody, requestBody, requestVariables);
 
   return (
     <div class="list-padding">
@@ -32,7 +34,15 @@ export default function Panel({
               : "list-border-error list-spacing"
           }
         >
-          <ListItem button onClick={handleClick(id, responseBody, requestBody)}>
+          <ListItem
+            button
+            onClick={handleClick(
+              id,
+              responseBody,
+              requestBody,
+              requestVariables
+            )}
+          >
             <div class="list-container list-spacing">
               <div className={`requestMethod ${method.toLowerCase()}`}>
                 {method}
