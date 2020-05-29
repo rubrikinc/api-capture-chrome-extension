@@ -47,8 +47,26 @@ export default class DevToolsPanel extends React.Component {
 
   scrollToBottomRef = React.createRef();
 
+  shouldBeFilterd = (path) => {
+    let shouldBeFiltered = false;
+    if (helperApiCalls.includes(path)) {
+      shouldBeFiltered = true;
+    }
+
+    try {
+      if (path.includes("User")) {
+        shouldBeFiltered = true;
+      }
+    } catch (error) {}
+
+    return shouldBeFiltered;
+  };
+
   handleNetworkRequest = (request) => {
     let isRubrikApiCall = false;
+    let httpMethod = request.request.method;
+    let requestBody;
+    let path;
     for (const header of request.request.headers) {
       // Check to see if the site is CDM
       try {
@@ -63,7 +81,10 @@ export default class DevToolsPanel extends React.Component {
       // Check to see if the site is Polaris
       try {
         if (header["name"] === ":authority") {
-          if (header["value"].includes("my.rubrik.com")) {
+          if (
+            header["value"].includes("my.rubrik.com") ||
+            header["value"].includes("my.rubrik-lab.com")
+          ) {
             isRubrikApiCall = true;
           }
         }
@@ -72,42 +93,50 @@ export default class DevToolsPanel extends React.Component {
       }
     }
 
-    let path = request.request.url.split("/api")[1];
+    path = request.request.url.split("/api")[1];
+
+    // Additional Polaris specifc filter for items that get past the initial
+    // header check
+    if (
+      request.request.url.includes("publicKeys.json") ||
+      request.request.url.includes("manifest.json") ||
+      !path
+    ) {
+      isRubrikApiCall = false;
+    }
+
+    // Add another layer of more generic checks for endpoints that have may
+    // cluster specific variables included
+    if (request.request.bodySize !== 0) {
+      let requestBodyJSON = JSON.parse(request.request.postData.text);
+      requestBody = JSON.stringify(requestBodyJSON, null, 2);
+    } else {
+      requestBody = JSON.stringify("null", null, 2);
+    }
+
+    try {
+      if (path.includes("graphql")) {
+        // override the default POST http method with either mutation or query
+        if (request.request.bodySize !== 0) {
+          request.request.postData.text.includes("mutation")
+            ? (httpMethod = "mutation")
+            : (httpMethod = "query");
+        }
+
+        let ast = parse(JSON.parse(request.request.postData.text)["query"]);
+        try {
+          path = ast["definitions"][0]["name"]["value"];
+        } catch (error) {}
+        try {
+          requestBody = print(ast);
+        } catch (error) {}
+      }
+    } catch (error) {}
 
     // Before logging -- validate the API calls originated from Rubrik
     // and is not in the helperApiCalls list
-    if (isRubrikApiCall && !helperApiCalls.includes(path)) {
-      let httpMethod = request.request.method;
-      let requestBody;
-      let isGraphQL = false;
-
-      // Add another layer of more generic checks for endpoints that have may
-      // cluster specific variables included
-
-      if (!path.includes("User")) {
-        if (request.request.bodySize !== 0) {
-          let requestBodyJSON = JSON.parse(request.request.postData.text);
-          requestBody = JSON.stringify(requestBodyJSON, null, 2);
-        } else {
-          requestBody = null;
-        }
-
-        if (path.includes("graphql")) {
-          // override the default POST http method with either mutation or query
-          if (request.request.bodySize !== 0) {
-            request.request.postData.text.includes("mutation")
-              ? (httpMethod = "mutation")
-              : (httpMethod = "query");
-          }
-
-          let ast = parse(JSON.parse(request.request.postData.text)["query"]);
-          try {
-            path = ast["definitions"][0]["name"]["value"];
-          } catch (error) {}
-          try {
-            requestBody = print(ast);
-          } catch (error) {}
-        }
+    if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
+      try {
         request.getContent((content, encoding) => {
           this.setState({
             apiCalls: [
@@ -124,7 +153,7 @@ export default class DevToolsPanel extends React.Component {
             ],
           });
         });
-      }
+      } catch (error) {}
     }
   };
 
