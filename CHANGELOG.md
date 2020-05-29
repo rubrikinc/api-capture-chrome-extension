@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **Fixed** for any bug fixes.
 - **Security** in case of vulnerabilities.
 
+## v0.2.0 (Beta)
+
+- Categorize GraphQL API calls as either a `QUERY` or a `MUTATION` ([Issue 3](https://github.com/rubrikinc/api-capture-chrome-extension/issues/3))
+- Add support for logging API calls from Polaris ([Issue 1](https://github.com/rubrikinc/api-capture-chrome-extension/issues/1))
+- Format the GraphQL request body output so that it is human readable ([Issue 5](https://github.com/rubrikinc/api-capture-chrome-extension/issues/5))
+- Add the ability to view GraphQL request variables ([Issue 5](https://github.com/rubrikinc/api-capture-chrome-extension/issues/5))
+
+
 ## v0.1.0 (Beta)
 
 ### Added
@@ -22,6 +30,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - View the Rubrik API calls Response and Request Bodies
 
 ## Unreleased
-
-- Categorize GraphQL API calls as either a `QUERY` or a `MUTATION` ([Issue 3](https://github.com/rubrikinc/api-capture-chrome-extension/issues/3))
-- Add support for logging API calls from Polaris ([Issue 1](https://github.com/rubrikinc/api-capture-chrome-extension/issues/1))
