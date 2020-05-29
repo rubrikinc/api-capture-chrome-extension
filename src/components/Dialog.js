@@ -94,8 +94,8 @@ export default function FullScreenDialog({
               aria-label="simple tabs example"
               indicatorColor="#000"
             >
-              <Tab label="Response Body" />
               <Tab label="Request Body" />
+              <Tab label="Response Body" />
             </Tabs>
 
             {/* <Button autoFocus color="inherit" onClick={handleClose}>
@@ -105,12 +105,12 @@ export default function FullScreenDialog({
         </AppBar>
         <TabPanel value={value} index={0}>
           <SyntaxHighlighter language="json" style={githubGist}>
-            {JSON.stringify(responseBody, null, 2)}
+            {requestBody}
           </SyntaxHighlighter>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <SyntaxHighlighter language="json" style={githubGist}>
-            {requestBody}
+            {JSON.stringify(responseBody, null, 2)}
           </SyntaxHighlighter>
         </TabPanel>
       </Dialog>
