@@ -67,7 +67,8 @@ export default class DevToolsPanel extends React.Component {
     }
 
     try {
-      if (path.includes("User")) {
+      // Filter /internal/organization/{orgID}
+      if (path.includes("User") || path.includes("Organization%3A")) {
         shouldBeFiltered = true;
       }
     } catch (error) {}
