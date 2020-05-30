@@ -114,9 +114,15 @@ export default function FullScreenDialog({
         </TabPanel>
         {requestVariables ? (
           <TabPanel value={value} index={1}>
-            <SyntaxHighlighter language="json" style={githubGist}>
-              {requestVariables}
-            </SyntaxHighlighter>
+            {requestVariables === "{}" ? (
+              <Alert severity="info">
+                The API call does not contain any Request Variables.
+              </Alert>
+            ) : (
+              <SyntaxHighlighter language="json" style={githubGist}>
+                {requestVariables}
+              </SyntaxHighlighter>
+            )}
           </TabPanel>
         ) : null}
         <TabPanel value={value} index={requestVariables ? 2 : 1}>
