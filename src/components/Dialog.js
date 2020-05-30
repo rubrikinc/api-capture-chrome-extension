@@ -11,6 +11,7 @@ import Slide from "@material-ui/core/Slide";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import { Alert } from "@material-ui/lab";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -97,14 +98,19 @@ export default function FullScreenDialog({
               <Tab label="Request Body" />
               {requestVariables ? <Tab label="Request Variables" /> : null}
               <Tab label="Response Body" />
-              {}
             </Tabs>
           </Toolbar>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <SyntaxHighlighter language="json" style={githubGist}>
-            {requestBody}
-          </SyntaxHighlighter>
+          {requestBody === "null" ? (
+            <Alert severity="info">
+              The API call does not contain a Request Body.
+            </Alert>
+          ) : (
+            <SyntaxHighlighter language="json" style={githubGist}>
+              {requestBody}
+            </SyntaxHighlighter>
+          )}
         </TabPanel>
         {requestVariables ? (
           <TabPanel value={value} index={1}>

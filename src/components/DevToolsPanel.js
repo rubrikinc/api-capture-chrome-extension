@@ -126,7 +126,7 @@ export default class DevToolsPanel extends React.Component {
       let requestBodyJSON = JSON.parse(request.request.postData.text);
       requestBody = JSON.stringify(requestBodyJSON, null, 2);
     } else {
-      requestBody = JSON.stringify("null", null, 2);
+      requestBody = "null";
     }
 
     try {
