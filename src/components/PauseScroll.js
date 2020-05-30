@@ -1,5 +1,5 @@
 import React from "react";
-import Fab from "@material-ui/core/Fab";
+import Chip from "@material-ui/core/Chip";
 import "./PauseScroll.css";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -17,14 +17,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PauseScrollButton() {
-  const classes = useStyles();
-
   return (
     <div class="fab">
-      <Fab size="small" variant="extended">
-        <PauseIcon className={classes.extendedIcon} />
-        Scroll
-      </Fab>
+      <Chip
+        color="primary"
+        size="small"
+        icon={<PauseIcon />}
+        label="Scroll"
+        onClick={console.log("Pause Scroll")}
+      />
     </div>
   );
 }
