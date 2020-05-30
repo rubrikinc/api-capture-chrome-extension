@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **Fixed** for any bug fixes.
 - **Security** in case of vulnerabilities.
 
+## Unreleased
+
+- When an API call does not contain a `Request Body` or `Request Variables` a informational message will be shown instead of `null` or `{}` message. ([Issue 4](https://github.com/rubrikinc/api-capture-chrome-extension/issues/4))
+
 ## v0.2.0 (Beta)
 
 - Categorize GraphQL API calls as either a `QUERY` or a `MUTATION` ([Issue 3](https://github.com/rubrikinc/api-capture-chrome-extension/issues/3))
@@ -21,12 +25,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Format the GraphQL request body output so that it is human readable ([Issue 5](https://github.com/rubrikinc/api-capture-chrome-extension/issues/5))
 - Add the ability to view GraphQL request variables ([Issue 5](https://github.com/rubrikinc/api-capture-chrome-extension/issues/5))
 
-
 ## v0.1.0 (Beta)
 
 ### Added
 
 - Monitor network traffic for API calls made from the Rubrik CDM UI and then list each call detected
 - View the Rubrik API calls Response and Request Bodies
-
-## Unreleased
