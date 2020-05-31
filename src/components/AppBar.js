@@ -34,6 +34,7 @@ export default function HeaderBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            disabled
           >
             <img
               alt="Rubrik logo"
