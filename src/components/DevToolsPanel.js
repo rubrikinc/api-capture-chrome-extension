@@ -35,7 +35,11 @@ const cdmBackgroundApiCalls = [
   "/v1/saml/sso_status",
 ];
 
-const polarisBackgroundApiCalls = ["FeatureFlagQuery"];
+const polarisBackgroundApiCalls = [
+  "FeatureFlagQuery",
+  "CurrentUserRolesQuery",
+  "CurrentUserPermissionsQuery",
+];
 
 const combinedBackgroundApiCalls = [
   ...cdmBackgroundApiCalls,
@@ -68,8 +72,16 @@ export default class DevToolsPanel extends React.Component {
     }
 
     try {
-      // Filter /internal/organization/{orgID}
-      if (path.includes("User") || path.includes("Organization%3A")) {
+      // Filter CDM:
+      //  - /internal/user/{userID}
+      //  - /internal/authorization/effective/roles?principal={userID}&resource_types=Global
+      //  - /internal/organization/{orgID}
+
+      if (
+        path.includes("User:::") ||
+        path.includes("User%3A") ||
+        path.includes("Organization%3A")
+      ) {
         shouldBeFiltered = true;
       }
     } catch (error) {}
