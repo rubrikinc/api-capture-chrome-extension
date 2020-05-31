@@ -2,10 +2,10 @@ import React from "react";
 import HeaderBar from "./AppBar";
 import Panel from "./CreatePanels";
 import FullScreenDialog from "./Dialog";
-import PauseScrollButton from "./PauseScroll";
+import { parse, print } from "graphql";
+
 import "./DevToolsPanel.css";
 import "./CreatePanels.css";
-import { parse, print } from "graphql";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
 const cdmBackgroundApiCalls = [
@@ -277,7 +277,6 @@ export default class DevToolsPanel extends React.Component {
           style={{ float: "left", clear: "both" }}
           ref={this.scrollToBottomRef}
         ></div>
-        {this.state.apiCalls.length > 0 ? <PauseScrollButton /> : null}
       </>
     );
   }
