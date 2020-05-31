@@ -38,7 +38,6 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -81,20 +80,10 @@ export default function FullScreenDialog({
       >
         <AppBar className={classes.appBar} style={{ background: "#1DA1DC" }}>
           <Toolbar variant="dense">
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
+            <IconButton edge="start" color="inherit" onClick={handleClose}>
               <CloseIcon />
             </IconButton>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="simple tabs example"
-              indicatorColor="#000"
-            >
+            <Tabs value={value} onChange={handleChange} indicatorColor="#000">
               <Tab label="Request Body" />
               {requestVariables ? <Tab label="Request Variables" /> : null}
               <Tab label="Response Body" />
