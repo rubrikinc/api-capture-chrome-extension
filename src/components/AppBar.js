@@ -9,7 +9,11 @@ import rubrikLogo from "../images/rubrikLogo.svg";
 import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
-  menuButton: {
+  root: {
+    paddingLeft: "1%",
+    paddingRight: "1%",
+  },
+  logo: {
     marginRight: theme.spacing(2),
   },
 }));
@@ -27,7 +31,7 @@ export default function HeaderBar() {
       <Toolbar variant="dense">
         <IconButton
           edge="start"
-          className={classes.menuButton}
+          className={classes.logo}
           color="inherit"
           aria-label="menu"
           disabled

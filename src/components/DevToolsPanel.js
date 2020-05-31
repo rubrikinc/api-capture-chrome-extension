@@ -236,47 +236,49 @@ export default class DevToolsPanel extends React.Component {
   render() {
     return (
       <>
-        <HeaderBar />
-        {this.state.showRequestBody ? (
-          <FullScreenDialog
-            responseBody={this.state.apiDialogContent["responseBody"]}
-            requestBody={this.state.apiDialogContent["requestBody"]}
-            closeRequestBody={this.handleCloseRequestBody}
-            requestVariables={this.state.apiDialogContent["requestVariables"]}
-          />
-        ) : null}
-
         <div class="panel-header-padding">
+          <HeaderBar />
+
+          {this.state.showRequestBody ? (
+            <FullScreenDialog
+              responseBody={this.state.apiDialogContent["responseBody"]}
+              requestBody={this.state.apiDialogContent["requestBody"]}
+              closeRequestBody={this.handleCloseRequestBody}
+              requestVariables={this.state.apiDialogContent["requestVariables"]}
+            />
+          ) : null}
+
           <div className="header-container">
             <div className="requestMethodHeader">Method&emsp;</div>
             <div className="endpointHeader">&emsp;API Endpoint</div>
 
             <div className="responseTime">Response Time&emsp;</div>
           </div>
-        </div>
-        <div>
-          {this.state.apiCalls.map((apiCall) => {
-            return (
-              <Panel
-                id={apiCall["id"]}
-                status={apiCall["status"]}
-                method={apiCall["httpMethod"]}
-                path={apiCall["path"]}
-                responseBody={apiCall["responseBody"]}
-                requestBody={apiCall["requestBody"]}
-                responseTime={apiCall["responseTime"]}
-                showRequestBody={this.handleShowRequestBody}
-                requestVariables={apiCall["requestVariables"]}
-              />
-            );
-          })}
-        </div>
 
-        {/* Div used as the bottom placeholder to scroll to */}
-        <div
-          style={{ float: "left", clear: "both" }}
-          ref={this.scrollToBottomRef}
-        ></div>
+          <div>
+            {this.state.apiCalls.map((apiCall) => {
+              return (
+                <Panel
+                  id={apiCall["id"]}
+                  status={apiCall["status"]}
+                  method={apiCall["httpMethod"]}
+                  path={apiCall["path"]}
+                  responseBody={apiCall["responseBody"]}
+                  requestBody={apiCall["requestBody"]}
+                  responseTime={apiCall["responseTime"]}
+                  showRequestBody={this.handleShowRequestBody}
+                  requestVariables={apiCall["requestVariables"]}
+                />
+              );
+            })}
+          </div>
+
+          {/* Div used as the bottom placeholder to scroll to */}
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={this.scrollToBottomRef}
+          ></div>
+        </div>
       </>
     );
   }

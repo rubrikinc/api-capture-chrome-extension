@@ -6,6 +6,7 @@ body {
 /* *********************************** */
 
 .header-container {
+  padding-top: 1%;
   font-size: 0.857rem;
   display: flex;
   font-weight: 400;
@@ -15,11 +16,6 @@ body {
 
 /*       LIST         */
 /* ******************* */
-
-.list-padding {
-  padding-left: 1%;
-  padding-right: 1%;
-}
 
 .list-container {
   font-size: 0.886rem;
