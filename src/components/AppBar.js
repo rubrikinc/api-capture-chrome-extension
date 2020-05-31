@@ -11,6 +11,8 @@ import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingLeft: "1%",
+    paddingRight: "1%",
   },
   menuButton: {
     marginRight: theme.spacing(2),

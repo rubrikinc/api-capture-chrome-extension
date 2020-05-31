@@ -24,7 +24,9 @@ export default function PauseScrollButton() {
         size="small"
         icon={<PauseIcon />}
         label="Scroll"
-        onClick={console.log("Pause Scroll")}
+        onClick={(e) => {
+          console.log(e);
+        }}
       />
     </div>
   );

@@ -17,8 +17,8 @@ body {
 /* ******************* */
 
 .list-padding {
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 
 .list-container {
@@ -32,6 +32,10 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/* .list-spacing:hover {
+  background-color: #f5f5f5;
+} */
 
 .list-border-success {
   border-right: 4px solid #09c997;
