@@ -236,7 +236,7 @@ export default class DevToolsPanel extends React.Component {
   render() {
     return (
       <>
-        <div class="panel-header-padding">
+        <div>
           <HeaderBar />
 
           {this.state.showRequestBody ? (
@@ -248,14 +248,14 @@ export default class DevToolsPanel extends React.Component {
             />
           ) : null}
 
-          <div className="header-container">
+          <div className="header-container panel-padding">
             <div className="requestMethodHeader">Method&emsp;</div>
             <div className="endpointHeader">&emsp;API Endpoint</div>
 
             <div className="responseTime">Response Time&emsp;</div>
           </div>
 
-          <div>
+          <div className="panel-padding">
             {this.state.apiCalls.map((apiCall) => {
               return (
                 <Panel
