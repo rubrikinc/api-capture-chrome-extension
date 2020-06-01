@@ -39,6 +39,7 @@ const polarisBackgroundApiCalls = [
   "FeatureFlagQuery",
   "CurrentUserRolesQuery",
   "CurrentUserPermissionsQuery",
+  "UserInfoQuery",
 ];
 
 const combinedBackgroundApiCalls = [
@@ -58,6 +59,7 @@ export default class DevToolsPanel extends React.Component {
         requestBody: null,
         requestVariables: null,
       },
+      enableScrollToBottom: true,
     };
     this.handleShowRequestBody = this.handleShowRequestBody.bind(this);
     this.handleCloseRequestBody = this.handleCloseRequestBody.bind(this);
@@ -199,8 +201,16 @@ export default class DevToolsPanel extends React.Component {
     }
   };
 
+  handlePauseScroll = () => {
+    this.state.enableScrollToBottom
+      ? this.setState({ enableScrollToBottom: false })
+      : this.setState({ enableScrollToBottom: true });
+  };
+
   scrollToBottom = () => {
-    this.scrollToBottomRef.current.scrollIntoView({ behavior: "smooth" });
+    if (this.state.enableScrollToBottom) {
+      this.scrollToBottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   componentDidMount() {
@@ -237,7 +247,10 @@ export default class DevToolsPanel extends React.Component {
     return (
       <>
         <div>
-          <HeaderBar />
+          <HeaderBar
+            enableScrollToBottom={this.state.enableScrollToBottom}
+            handlePauseScroll={this.handlePauseScroll}
+          />
 
           {this.state.showRequestBody ? (
             <FullScreenDialog

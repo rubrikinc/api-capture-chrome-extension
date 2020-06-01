@@ -24,8 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HeaderBar() {
+export default function HeaderBar({ enableScrollToBottom, handlePauseScroll }) {
   const classes = useStyles();
+
+  const pauseScroll = () => {
+    handlePauseScroll();
+  };
 
   return (
     <div className={classes.root}>
@@ -65,8 +69,10 @@ export default function HeaderBar() {
             size="small"
             color="primary"
             style={{ color: "rgb(105, 115, 134)" }}
+            onClick={pauseScroll}
           >
-            Pause Scroll
+            {console.log(enableScrollToBottom)}
+            {enableScrollToBottom === true ? "Pause Scroll" : "Resume Scroll"}
           </Button>
         </Toolbar>
       </AppBar>
