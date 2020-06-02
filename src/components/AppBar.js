@@ -24,11 +24,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HeaderBar({ enableScrollToBottom, handlePauseScroll }) {
+export default function HeaderBar({
+  enableScrollToBottom,
+  handlePauseScroll,
+  handleRecording,
+}) {
   const classes = useStyles();
 
-  const pauseScroll = () => {
+  const handlePauseScrollButton = () => {
     handlePauseScroll();
+  };
+
+  const [localRecordingState, setLocalRecordingState] = React.useState("Start");
+
+  const handleRecordingButton = () => {
+    if (localRecordingState === "Start") {
+      handleRecording("start");
+      setLocalRecordingState("Stop");
+    } else if (localRecordingState === "Stop") {
+      handleRecording("stopped");
+      setLocalRecordingState("Reset");
+    } else {
+      handleRecording("reset");
+      setLocalRecordingState("Start");
+    }
   };
 
   return (
@@ -62,17 +81,17 @@ export default function HeaderBar({ enableScrollToBottom, handlePauseScroll }) {
             <Button
               size="small"
               style={{ color: "rgb(105, 115, 134)", "margin-right": "30px" }}
+              onClick={handleRecordingButton}
             >
-              Start Recording
+              {`${localRecordingState} Recording`}
             </Button>
 
             <Button
               size="small"
               color="primary"
               style={{ color: "rgb(105, 115, 134)" }}
-              onClick={pauseScroll}
+              onClick={handlePauseScrollButton}
             >
-              {console.log(enableScrollToBottom)}
               {enableScrollToBottom === true ? "Pause Scroll" : "Resume Scroll"}
             </Button>
           </div>

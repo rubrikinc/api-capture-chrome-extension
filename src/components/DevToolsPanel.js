@@ -60,9 +60,11 @@ export default class DevToolsPanel extends React.Component {
         requestVariables: null,
       },
       enableScrollToBottom: true,
+      recordingStopped: false,
     };
     this.handleShowRequestBody = this.handleShowRequestBody.bind(this);
     this.handleCloseRequestBody = this.handleCloseRequestBody.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   scrollToBottomRef = React.createRef();
@@ -92,112 +94,114 @@ export default class DevToolsPanel extends React.Component {
   };
 
   handleNetworkRequest = (request) => {
-    let isRubrikApiCall = false;
-    let httpMethod = request.request.method;
-    let path;
-    let requestBody;
-    let requestVariables = null;
-    for (const header of request.request.headers) {
-      // Check to see if the site is CDM
-      try {
-        // toLowerCase in order to support pre CDM 5.2
-        if (header["name"].toLowerCase() === "rk-web-app-request") {
-          isRubrikApiCall = true;
-        }
-      } catch (error) {
-        continue;
-      }
-
-      // Check to see if the site is Polaris
-      try {
-        if (header["name"] === ":authority") {
-          if (
-            header["value"].includes("my.rubrik.com") ||
-            header["value"].includes("my.rubrik-lab.com")
-          ) {
+    if (this.state.recordingStopped === false) {
+      let isRubrikApiCall = false;
+      let httpMethod = request.request.method;
+      let path;
+      let requestBody;
+      let requestVariables = null;
+      for (const header of request.request.headers) {
+        // Check to see if the site is CDM
+        try {
+          // toLowerCase in order to support pre CDM 5.2
+          if (header["name"].toLowerCase() === "rk-web-app-request") {
             isRubrikApiCall = true;
           }
-        }
-      } catch (error) {
-        continue;
-      }
-    }
-
-    path = request.request.url.split("/api")[1];
-
-    // Additional Polaris specifc filter for items that get past the initial
-    // header check
-    if (
-      request.request.url.includes("publicKeys.json") ||
-      request.request.url.includes("manifest.json") ||
-      !path
-    ) {
-      isRubrikApiCall = false;
-    }
-
-    // Add another layer of more generic checks for endpoints that have may
-    // cluster specific variables included
-    if (request.request.bodySize !== 0) {
-      let requestBodyJSON = JSON.parse(request.request.postData.text);
-      requestBody = JSON.stringify(requestBodyJSON, null, 2);
-    } else {
-      requestBody = "null";
-    }
-
-    try {
-      if (path.includes("graphql")) {
-        // override the default POST http method with either mutation or query
-        if (request.request.bodySize !== 0) {
-          request.request.postData.text.includes("mutation")
-            ? (httpMethod = "mutation")
-            : (httpMethod = "query");
-        }
-
-        let ast = parse(JSON.parse(request.request.postData.text)["query"]);
-        try {
-          path = ast["definitions"][0]["name"]["value"];
-        } catch (error) {}
-
-        try {
-          requestBody = print(ast);
-        } catch (error) {}
-
-        try {
-          requestVariables = JSON.parse(request.request.postData.text)[
-            "variables"
-          ];
-
-          requestVariables = JSON.stringify(requestVariables, null, 2);
         } catch (error) {
-          // always return a non-null value. this is used down the line for logic
-          // processing
-          requestVariables = JSON.stringify("{}", null, 2);
+          continue;
+        }
+
+        // Check to see if the site is Polaris
+        try {
+          if (header["name"] === ":authority") {
+            if (
+              header["value"].includes("my.rubrik.com") ||
+              header["value"].includes("my.rubrik-lab.com")
+            ) {
+              isRubrikApiCall = true;
+            }
+          }
+        } catch (error) {
+          continue;
         }
       }
-    } catch (error) {}
 
-    // Before logging -- validate the API calls originated from Rubrik
-    // and is not in the shouldBeFilterd list
-    if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
+      path = request.request.url.split("/api")[1];
+
+      // Additional Polaris specifc filter for items that get past the initial
+      // header check
+      if (
+        request.request.url.includes("publicKeys.json") ||
+        request.request.url.includes("manifest.json") ||
+        !path
+      ) {
+        isRubrikApiCall = false;
+      }
+
+      // Add another layer of more generic checks for endpoints that have may
+      // cluster specific variables included
+      if (request.request.bodySize !== 0) {
+        let requestBodyJSON = JSON.parse(request.request.postData.text);
+        requestBody = JSON.stringify(requestBodyJSON, null, 2);
+      } else {
+        requestBody = "null";
+      }
+
       try {
-        request.getContent((content, encoding) => {
-          this.setState({
-            apiCalls: [
-              ...this.state.apiCalls,
-              {
-                id: this.state.apiCalls.length + 1,
-                status: request.response.status,
-                httpMethod: httpMethod,
-                path: path,
-                responseTime: request.time,
-                responseBody: JSON.parse(content),
-                requestBody: requestBody,
-                requestVariables: requestVariables,
-              },
-            ],
-          });
-        });
+        if (path.includes("graphql")) {
+          // override the default POST http method with either mutation or query
+          if (request.request.bodySize !== 0) {
+            request.request.postData.text.includes("mutation")
+              ? (httpMethod = "mutation")
+              : (httpMethod = "query");
+          }
+
+          let ast = parse(JSON.parse(request.request.postData.text)["query"]);
+          try {
+            path = ast["definitions"][0]["name"]["value"];
+          } catch (error) {}
+
+          try {
+            requestBody = print(ast);
+          } catch (error) {}
+
+          try {
+            requestVariables = JSON.parse(request.request.postData.text)[
+              "variables"
+            ];
+
+            requestVariables = JSON.stringify(requestVariables, null, 2);
+          } catch (error) {
+            // always return a non-null value. this is used down the line for logic
+            // processing
+            requestVariables = JSON.stringify("{}", null, 2);
+          }
+        }
       } catch (error) {}
+
+      // Before logging -- validate the API calls originated from Rubrik
+      // and is not in the shouldBeFilterd list
+      if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
+        try {
+          request.getContent((content, encoding) => {
+            this.setState({
+              apiCalls: [
+                ...this.state.apiCalls,
+                {
+                  id: this.state.apiCalls.length + 1,
+                  status: request.response.status,
+                  httpMethod: httpMethod,
+                  path: path,
+                  responseTime: request.time,
+                  responseBody: JSON.parse(content),
+                  requestBody: requestBody,
+                  requestVariables: requestVariables,
+                },
+              ],
+            });
+          });
+        } catch (error) {}
+      }
     }
   };
 
@@ -239,6 +243,22 @@ export default class DevToolsPanel extends React.Component {
     });
   }
 
+  handleRecording = (action) => {
+    if (action === "start") {
+      this.setState({
+        apiCalls: [],
+      });
+    } else if (action === "stopped") {
+      this.setState({
+        recordingStopped: true,
+      });
+    } else {
+      this.setState({
+        recordingStopped: false,
+      });
+    }
+  };
+
   static propTypes = {
     networkRequest: React.PropTypes.object.isRequired,
   };
@@ -250,6 +270,7 @@ export default class DevToolsPanel extends React.Component {
           <HeaderBar
             enableScrollToBottom={this.state.enableScrollToBottom}
             handlePauseScroll={this.handlePauseScroll}
+            handleRecording={this.handleRecording}
           />
 
           {this.state.showRequestBody ? (

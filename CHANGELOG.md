@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - When an API call does not contain a `Request Body` or `Request Variables` a informational message will be shown instead of `null` or `{}` message. ([Issue 4](https://github.com/rubrikinc/api-capture-chrome-extension/issues/4))
 - Filter background Polaris API calls ([Issue 16](https://github.com/rubrikinc/api-capture-chrome-extension/issues/16))
 - Add a button to pause the automatic scroll to bottom functionality ([Issue 7](https://github.com/rubrikinc/api-capture-chrome-extension/issues/7))
+- Add recording (start, stop, reset) functionality ([Issue 12](https://github.com/rubrikinc/api-capture-chrome-extension/issues/12))
 
 ## v0.2.0 (Beta)
 
