@@ -58,22 +58,24 @@ export default function HeaderBar({ enableScrollToBottom, handlePauseScroll }) {
           <Typography className={classes.title} style={{ color: "#697386" }}>
             API Code Capture
           </Typography>
-          <Button
-            size="small"
-            style={{ color: "rgb(105, 115, 134)", "margin-right": "30px" }}
-          >
-            Start Recording
-          </Button>
+          <div class="hide-buttons">
+            <Button
+              size="small"
+              style={{ color: "rgb(105, 115, 134)", "margin-right": "30px" }}
+            >
+              Start Recording
+            </Button>
 
-          <Button
-            size="small"
-            color="primary"
-            style={{ color: "rgb(105, 115, 134)" }}
-            onClick={pauseScroll}
-          >
-            {console.log(enableScrollToBottom)}
-            {enableScrollToBottom === true ? "Pause Scroll" : "Resume Scroll"}
-          </Button>
+            <Button
+              size="small"
+              color="primary"
+              style={{ color: "rgb(105, 115, 134)" }}
+              onClick={pauseScroll}
+            >
+              {console.log(enableScrollToBottom)}
+              {enableScrollToBottom === true ? "Pause Scroll" : "Resume Scroll"}
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
     </div>
