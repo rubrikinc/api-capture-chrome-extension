@@ -1,10 +1,11 @@
 {
   "name": "api-capture-chrome-extension",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.54",
     "@material-ui/styles": "^4.9.14",
     "graphql": "^15.0.0",
     "jss-rtl": "^0.3.0",

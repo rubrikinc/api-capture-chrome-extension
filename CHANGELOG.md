@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **Fixed** for any bug fixes.
 - **Security** in case of vulnerabilities.
 
+## Unreleased
+
+## v0.3.0 (Beta)
+
+- When an API call does not contain a `Request Body` or `Request Variables` a informational message will be shown instead of `null` or `{}` message. ([Issue 4](https://github.com/rubrikinc/api-capture-chrome-extension/issues/4))
+- Filter background Polaris API calls ([Issue 16](https://github.com/rubrikinc/api-capture-chrome-extension/issues/16))
+- Add a button to pause the automatic scroll to bottom functionality ([Issue 7](https://github.com/rubrikinc/api-capture-chrome-extension/issues/7))
+- Add recording (start, stop, reset) functionality ([Issue 12](https://github.com/rubrikinc/api-capture-chrome-extension/issues/12))
+
 ## v0.2.0 (Beta)
 
 - Categorize GraphQL API calls as either a `QUERY` or a `MUTATION` ([Issue 3](https://github.com/rubrikinc/api-capture-chrome-extension/issues/3))
@@ -21,12 +30,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Format the GraphQL request body output so that it is human readable ([Issue 5](https://github.com/rubrikinc/api-capture-chrome-extension/issues/5))
 - Add the ability to view GraphQL request variables ([Issue 5](https://github.com/rubrikinc/api-capture-chrome-extension/issues/5))
 
-
 ## v0.1.0 (Beta)
 
 ### Added
 
 - Monitor network traffic for API calls made from the Rubrik CDM UI and then list each call detected
 - View the Rubrik API calls Response and Request Bodies
-
-## Unreleased

@@ -14,3 +14,9 @@
 .app-bar-logo-text {
   color: "#000";
 }
+
+@media screen and (max-width: 650px) {
+  .hide-buttons {
+    display: none;
+  }
+}

@@ -6,6 +6,7 @@ body {
 /* *********************************** */
 
 .header-container {
+  padding-top: 70px;
   font-size: 0.857rem;
   display: flex;
   font-weight: 400;
@@ -15,11 +16,6 @@ body {
 
 /*       LIST         */
 /* ******************* */
-
-.list-padding {
-  padding-left: 5%;
-  padding-right: 5%;
-}
 
 .list-container {
   font-size: 0.886rem;
@@ -32,6 +28,10 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/* .list-spacing:hover {
+  background-color: #f5f5f5;
+} */
 
 .list-border-success {
   border-right: 4px solid #09c997;

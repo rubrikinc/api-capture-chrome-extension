@@ -23,36 +23,29 @@ export default function Panel({
   ) => showRequestBody(id, responseBody, requestBody, requestVariables);
 
   return (
-    <div class="list-padding">
-      <Paper>
-        <List
-          component="nav"
-          dense={true}
-          class={
-            httpSuccessCodes.includes(status)
-              ? "list-border-success list-spacing"
-              : "list-border-error list-spacing"
-          }
+    <Paper>
+      <List
+        component="nav"
+        dense={true}
+        class={
+          httpSuccessCodes.includes(status)
+            ? "list-border-success list-spacing"
+            : "list-border-error list-spacing"
+        }
+      >
+        <ListItem
+          button
+          onClick={handleClick(id, responseBody, requestBody, requestVariables)}
         >
-          <ListItem
-            button
-            onClick={handleClick(
-              id,
-              responseBody,
-              requestBody,
-              requestVariables
-            )}
-          >
-            <div class="list-container list-spacing">
-              <div className={`requestMethod ${method.toLowerCase()}`}>
-                {method}
-              </div>
-              <div class="endpoint">{path}</div>
-              <div class="responseTime">{Math.round(responseTime)}ms</div>
+          <div class="list-container list-spacing">
+            <div className={`requestMethod ${method.toLowerCase()}`}>
+              {method}
             </div>
-          </ListItem>
-        </List>
-      </Paper>
-    </div>
+            <div class="endpoint">{path}</div>
+            <div class="responseTime">{Math.round(responseTime)}ms</div>
+          </div>
+        </ListItem>
+      </List>
+    </Paper>
   );
 }
