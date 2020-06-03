@@ -11,3 +11,13 @@
   transform: translate(-50%, -50%);
   color: #1da1dc;
 }
+
+.circular-progress-text {
+  top: 65%;
+  font-size: 1rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 200;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  text-align: center;
+}

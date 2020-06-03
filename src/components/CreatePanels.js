@@ -46,7 +46,9 @@ export default function Panel({
             <div className="copy-icon">
               <IconButton
                 onClick={() => {
-                  copy(`${method.toUpperCase()} ${path}`);
+                  try {
+                    copy(`${method.toUpperCase()} ${path}`);
+                  } catch (error) {}
                 }}
                 style={{ backgroundColor: "transparent" }}
                 size="small"

@@ -275,9 +275,14 @@ export default class DevToolsPanel extends React.Component {
             handleRecording={this.handleRecording}
           />
           {this.state.apiCalls.length === 0 ? (
-            <div className="circular-progress">
-              <CircularProgress size="70px" thickness="1" color="inherit" />
-            </div>
+            <>
+              <div className="circular-progress">
+                <CircularProgress size="70px" thickness="1" color="inherit" />
+              </div>
+              <div className="circular-progress circular-progress-text">
+                Monitoring for API calls from<br></br> Rubrik CDM or Polaris
+              </div>
+            </>
           ) : (
             <div className="header-container panel-padding">
               <div className="requestMethodHeader">Method&emsp;</div>
