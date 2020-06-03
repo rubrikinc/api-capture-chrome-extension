@@ -1,5 +1,6 @@
 import React from "react";
 import "./CreatePanels.css";
+import { copy } from "clipboard-js";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -44,7 +45,9 @@ export default function Panel({
           {showCopyButton ? (
             <div className="copy-icon">
               <IconButton
-                onClick={() => console.log(`${method.toUpperCase()} ${path}`)}
+                onClick={() => {
+                  copy(`${method.toUpperCase()} ${path}`);
+                }}
                 style={{ backgroundColor: "transparent" }}
                 size="small"
               >
@@ -66,7 +69,9 @@ export default function Panel({
               <div className={`requestMethod ${method.toLowerCase()}`}>
                 {method}
               </div>
-              <div class="endpoint">{path}</div>
+              <div id="endpoint" class="endpoint">
+                {path}
+              </div>
               <div class="responseTime">{Math.round(responseTime)}ms</div>
             </div>
           </ListItem>

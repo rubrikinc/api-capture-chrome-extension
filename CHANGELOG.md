@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 - Add a progress bar that is active when waiting for API calls from a Rubrik UI. ([Issue 21](https://github.com/rubrikinc/api-capture-chrome-extension/issues/21))
+- Each API entry now has a copy button that is automatically shown on hover that will copy the API Method and Endpoint to the clipboard. ([Issue 9](https://github.com/rubrikinc/api-capture-chrome-extension/issues/9))
 
 ## v0.3.0 (Beta)
 
