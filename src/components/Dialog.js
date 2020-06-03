@@ -24,6 +24,24 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  bottomAppBar: {
+    top: "auto",
+    bottom: 0,
+    height: "40px",
+  },
+  api: {
+    margin: 0,
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    fontSize: "1rem",
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: 200,
+    lineHeight: 1.5,
+    letterSpacing: "0.00938em",
+    color: "rgb(105, 115, 134)",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -54,6 +72,8 @@ export default function FullScreenDialog({
   requestBody,
   closeRequestBody,
   requestVariables,
+  method,
+  path,
 }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -119,6 +139,15 @@ export default function FullScreenDialog({
             {JSON.stringify(responseBody, null, 2)}
           </SyntaxHighlighter>
         </TabPanel>
+        <AppBar
+          position="fixed"
+          style={{
+            backgroundColor: "#FFF",
+          }}
+          className={classes.bottomAppBar}
+        >
+          <div className={classes.api}>{`${method.toUpperCase()} ${path}`}</div>
+        </AppBar>
       </Dialog>
     </div>
   );

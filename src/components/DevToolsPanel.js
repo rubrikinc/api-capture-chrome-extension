@@ -60,6 +60,8 @@ export default class DevToolsPanel extends React.Component {
         responseBody: null,
         requestBody: null,
         requestVariables: null,
+        method: null,
+        path: null,
       },
       enableScrollToBottom: true,
       recordingStopped: false,
@@ -227,13 +229,22 @@ export default class DevToolsPanel extends React.Component {
     this.scrollToBottom();
   }
 
-  handleShowRequestBody(id, responseBody, requestBody, requestVariables) {
+  handleShowRequestBody(
+    id,
+    responseBody,
+    requestBody,
+    requestVariables,
+    method,
+    path
+  ) {
     this.setState({
       apiDialogContent: {
         id: id,
         responseBody: responseBody,
         requestBody: requestBody,
         requestVariables: requestVariables,
+        method: method,
+        path: path,
       },
       showRequestBody: true,
     });
@@ -298,6 +309,8 @@ export default class DevToolsPanel extends React.Component {
               requestBody={this.state.apiDialogContent["requestBody"]}
               closeRequestBody={this.handleCloseRequestBody}
               requestVariables={this.state.apiDialogContent["requestVariables"]}
+              method={this.state.apiDialogContent["method"]}
+              path={this.state.apiDialogContent["path"]}
             />
           ) : null}
 

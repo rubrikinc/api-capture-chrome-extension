@@ -21,9 +21,22 @@ export default function Panel({
 }) {
   const httpSuccessCodes = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
-  const handleClick = (id, responseBody, requestBody, requestVariables) => (
-    event
-  ) => showRequestBody(id, responseBody, requestBody, requestVariables);
+  const handleClick = (
+    id,
+    responseBody,
+    requestBody,
+    requestVariables,
+    method,
+    path
+  ) => (event) =>
+    showRequestBody(
+      id,
+      responseBody,
+      requestBody,
+      requestVariables,
+      method,
+      path
+    );
 
   const [showCopyButton, setShowCopyBody] = React.useState(false);
 
@@ -64,7 +77,9 @@ export default function Panel({
               id,
               responseBody,
               requestBody,
-              requestVariables
+              requestVariables,
+              method,
+              path
             )}
           >
             <div class="list-container list-spacing">
