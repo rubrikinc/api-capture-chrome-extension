@@ -16,9 +16,12 @@ import { Alert } from "@material-ui/lab";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
+import "./CreatePanels.css";
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "relative",
+    color: "rgb(105, 115, 134)",
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -32,11 +35,10 @@ const useStyles = makeStyles((theme) => ({
   api: {
     margin: 0,
     position: "absolute",
-    top: "40%",
+    top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     fontSize: "1rem",
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: 200,
     lineHeight: 1.5,
     letterSpacing: "0.00938em",
@@ -98,7 +100,7 @@ export default function FullScreenDialog({
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar className={classes.appBar} style={{ background: "#1DA1DC" }}>
+        <AppBar className={classes.appBar} style={{ backgroundColor: "#FFF" }}>
           <Toolbar variant="dense">
             <IconButton edge="start" color="inherit" onClick={handleClose}>
               <CloseIcon />
@@ -146,7 +148,12 @@ export default function FullScreenDialog({
           }}
           className={classes.bottomAppBar}
         >
-          <div className={classes.api}>{`${method.toUpperCase()} ${path}`}</div>
+          <div className={classes.api}>
+            <span className={`requestMethod ${method.toLowerCase()}`}>
+              {method.toUpperCase()}&nbsp;
+            </span>
+            <span class="endpoint">{path}</span>
+          </div>
         </AppBar>
       </Dialog>
     </div>

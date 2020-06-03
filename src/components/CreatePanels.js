@@ -86,9 +86,7 @@ export default function Panel({
               <div className={`requestMethod ${method.toLowerCase()}`}>
                 {method}
               </div>
-              <div id="endpoint" class="endpoint">
-                {path}
-              </div>
+              <div class="endpoint">{path}</div>
               <div class="responseTime">{Math.round(responseTime)}ms</div>
             </div>
           </ListItem>
