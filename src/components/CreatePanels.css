@@ -138,3 +138,23 @@ body {
   text-transform: uppercase;
   color: rgb(108, 117, 118);
 }
+
+.list-container {
+  display: flex;
+}
+
+.copy-icon {
+  width: 20px;
+  background-color: rgb(245, 245, 245);
+  text-align: center;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.copy-icon:hover {
+  background-color: transparent;
+}
+
+.list {
+  flex-grow: 1;
+}

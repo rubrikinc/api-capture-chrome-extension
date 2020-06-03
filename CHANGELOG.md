@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+- Add a progress bar that is active when waiting for API calls from a Rubrik UI. ([Issue 21](https://github.com/rubrikinc/api-capture-chrome-extension/issues/21))
+
 ## v0.3.0 (Beta)
 
 - When an API call does not contain a `Request Body` or `Request Variables` a informational message will be shown instead of `null` or `{}` message. ([Issue 4](https://github.com/rubrikinc/api-capture-chrome-extension/issues/4))

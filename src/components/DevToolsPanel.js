@@ -4,6 +4,8 @@ import Panel from "./CreatePanels";
 import FullScreenDialog from "./Dialog";
 import { parse, print } from "graphql";
 
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import "./DevToolsPanel.css";
 import "./CreatePanels.css";
 
@@ -272,6 +274,18 @@ export default class DevToolsPanel extends React.Component {
             handlePauseScroll={this.handlePauseScroll}
             handleRecording={this.handleRecording}
           />
+          {this.state.apiCalls.length === 0 ? (
+            <div className="circular-progress">
+              <CircularProgress size="70px" thickness="1" color="inherit" />
+            </div>
+          ) : (
+            <div className="header-container panel-padding">
+              <div className="requestMethodHeader">Method&emsp;</div>
+              <div className="endpointHeader">&emsp;API Endpoint</div>
+
+              <div className="responseTime">Response Time&emsp;</div>
+            </div>
+          )}
 
           {this.state.showRequestBody ? (
             <FullScreenDialog
@@ -281,13 +295,6 @@ export default class DevToolsPanel extends React.Component {
               requestVariables={this.state.apiDialogContent["requestVariables"]}
             />
           ) : null}
-
-          <div className="header-container panel-padding">
-            <div className="requestMethodHeader">Method&emsp;</div>
-            <div className="endpointHeader">&emsp;API Endpoint</div>
-
-            <div className="responseTime">Response Time&emsp;</div>
-          </div>
 
           <div className="panel-padding">
             {this.state.apiCalls.map((apiCall) => {
