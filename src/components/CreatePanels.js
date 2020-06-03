@@ -1,5 +1,6 @@
 import React from "react";
 import "./CreatePanels.css";
+import { copy } from "clipboard-js";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,9 +21,22 @@ export default function Panel({
 }) {
   const httpSuccessCodes = [200, 201, 202, 203, 204, 205, 206, 207, 208, 226];
 
-  const handleClick = (id, responseBody, requestBody, requestVariables) => (
-    event
-  ) => showRequestBody(id, responseBody, requestBody, requestVariables);
+  const handleClick = (
+    id,
+    responseBody,
+    requestBody,
+    requestVariables,
+    method,
+    path
+  ) => (event) =>
+    showRequestBody(
+      id,
+      responseBody,
+      requestBody,
+      requestVariables,
+      method,
+      path
+    );
 
   const [showCopyButton, setShowCopyBody] = React.useState(false);
 
@@ -44,7 +58,11 @@ export default function Panel({
           {showCopyButton ? (
             <div className="copy-icon">
               <IconButton
-                onClick={() => console.log(`${method.toUpperCase()} ${path}`)}
+                onClick={() => {
+                  try {
+                    copy(`${method.toUpperCase()} ${path}`);
+                  } catch (error) {}
+                }}
                 style={{ backgroundColor: "transparent" }}
                 size="small"
               >
@@ -59,7 +77,9 @@ export default function Panel({
               id,
               responseBody,
               requestBody,
-              requestVariables
+              requestVariables,
+              method,
+              path
             )}
           >
             <div class="list-container list-spacing">
