@@ -4,6 +4,8 @@ import "./CreatePanels.css";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 export default function Panel({
   id,
@@ -22,8 +24,13 @@ export default function Panel({
     event
   ) => showRequestBody(id, responseBody, requestBody, requestVariables);
 
+  const [showCopyButton, setShowCopyBody] = React.useState(false);
+
   return (
-    <Paper>
+    <Paper
+      onMouseEnter={() => setShowCopyBody(true)}
+      onMouseLeave={() => setShowCopyBody(false)}
+    >
       <List
         component="nav"
         dense={true}
@@ -33,18 +40,37 @@ export default function Panel({
             : "list-border-error list-spacing"
         }
       >
-        <ListItem
-          button
-          onClick={handleClick(id, responseBody, requestBody, requestVariables)}
-        >
-          <div class="list-container list-spacing">
-            <div className={`requestMethod ${method.toLowerCase()}`}>
-              {method}
+        <div className="list-container">
+          {showCopyButton ? (
+            <div className="copy-icon">
+              <IconButton
+                onClick={() => console.log(`${method.toUpperCase()} ${path}`)}
+                style={{ backgroundColor: "transparent" }}
+                size="small"
+              >
+                <FileCopyIcon fontSize="small" />
+              </IconButton>
             </div>
-            <div class="endpoint">{path}</div>
-            <div class="responseTime">{Math.round(responseTime)}ms</div>
-          </div>
-        </ListItem>
+          ) : null}
+
+          <ListItem
+            button
+            onClick={handleClick(
+              id,
+              responseBody,
+              requestBody,
+              requestVariables
+            )}
+          >
+            <div class="list-container list-spacing">
+              <div className={`requestMethod ${method.toLowerCase()}`}>
+                {method}
+              </div>
+              <div class="endpoint">{path}</div>
+              <div class="responseTime">{Math.round(responseTime)}ms</div>
+            </div>
+          </ListItem>
+        </div>
       </List>
     </Paper>
   );

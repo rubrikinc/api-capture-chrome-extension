@@ -96,8 +96,6 @@ export default class DevToolsPanel extends React.Component {
   };
 
   handleNetworkRequest = (request) => {
-    console.log(request);
-
     if (this.state.recordingStopped === false) {
       let isRubrikApiCall = false;
       let httpMethod = request.request.method;
