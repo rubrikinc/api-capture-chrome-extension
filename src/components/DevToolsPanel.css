@@ -4,7 +4,6 @@
 }
 
 .circular-progress {
-  margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,11 +12,29 @@
 }
 
 .circular-progress-text {
-  top: 65%;
+  top: 60%;
   font-size: 1rem;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 200;
   line-height: 1.5;
   letter-spacing: 0.00938em;
   text-align: center;
+}
+
+@media screen and (max-height: 750px) {
+  .circular-progress-text {
+    padding-top: 70px;
+  }
+}
+
+@media screen and (max-height: 290px) {
+  .circular-progress-text {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 200px) {
+  .circular-progress {
+    display: none;
+  }
 }
