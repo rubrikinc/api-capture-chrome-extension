@@ -32,12 +32,14 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     height: "40px",
   },
+  apiContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   api: {
-    margin: 0,
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    paddingTop: "5px",
+    width: "auto",
     fontSize: "1rem",
     fontWeight: 200,
     lineHeight: 1.5,
@@ -148,11 +150,13 @@ export default function FullScreenDialog({
           }}
           className={classes.bottomAppBar}
         >
-          <div className={classes.api}>
-            <span className={`requestMethod ${method.toLowerCase()}`}>
-              {method.toUpperCase()}&nbsp;
-            </span>
-            <span class="endpoint">{path}</span>
+          <div className={classes.apiContainer}>
+            <div className={classes.api}>
+              <span className={`requestMethod ${method.toLowerCase()}`}>
+                {method.toUpperCase()}&nbsp;
+              </span>
+              <span class="endpoint">{path}</span>
+            </div>
           </div>
         </AppBar>
       </Dialog>
