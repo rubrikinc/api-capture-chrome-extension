@@ -24,6 +24,16 @@ const useStyles = makeStyles((theme) => ({
   buttonColor: {
     color: "rgb(105, 115, 134)",
   },
+  appBar: {
+    background: "#fff",
+    borderBottom: "2px solid RGBA(105, 115, 134, 0.2)",
+  },
+  dividerLogoPadding: {
+    paddingRight: "10px",
+  },
+  dividerTextPadding: {
+    paddingLeft: "5px",
+  },
 }));
 
 export default function TopNavigationBar({
@@ -72,7 +82,7 @@ export default function TopNavigationBar({
               alt="Rubrik logo"
               src={rubrikLogo}
               width="30"
-              class="divider-logo-padding"
+              className={classes.dividerLogoPadding}
             />
             <Divider orientation="vertical" flexItem />
           </IconButton>
