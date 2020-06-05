@@ -1,3 +1,7 @@
+body {
+  background-color: RGBA(237, 239, 240, 1);
+}
+
 .panel-padding {
   padding-right: 0.5%;
   padding-left: 0.5%;
