@@ -1,7 +1,7 @@
 /* global chrome */
 import React from "react";
 import ReactDOM from "react-dom";
-import DevToolsPanel from "./components/DevToolsPanel";
+import App from "./components/App";
 
 import { create } from "jss";
 import { StylesProvider, jssPreset } from "@material-ui/core/styles";
@@ -24,9 +24,7 @@ function createPanel() {
 
           ReactDOM.render(
             <StylesProvider jss={jss}>
-              <DevToolsPanel
-                networkRequest={chrome.devtools.network.onRequestFinished}
-              />
+              <App networkRequest={chrome.devtools.network.onRequestFinished} />
             </StylesProvider>,
             panelWindow.document.getElementById("root")
           );

@@ -1,13 +1,13 @@
 import React from "react";
-import HeaderBar from "./AppBar";
-import Panel from "./CreatePanels";
-import FullScreenDialog from "./Dialog";
+import TopNavigationBar from "./TopNavigationBar";
+import ApiEntry from "./CreateApiEntry";
+import ApiDetailsDialog from "./ApiDetailsDialog";
 import { parse, print } from "graphql";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import "./DevToolsPanel.css";
-import "./CreatePanels.css";
+import "./App.css";
+import "./CreateApiEntry.css";
 
 // Known API calls that the Rubrik UI uses for internal functionality checks
 const cdmBackgroundApiCalls = [
@@ -49,7 +49,7 @@ const combinedBackgroundApiCalls = [
   ...polarisBackgroundApiCalls,
 ];
 
-export default class DevToolsPanel extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -280,7 +280,7 @@ export default class DevToolsPanel extends React.Component {
     return (
       <>
         <div>
-          <HeaderBar
+          <TopNavigationBar
             enableScrollToBottom={this.state.enableScrollToBottom}
             handlePauseScroll={this.handlePauseScroll}
             handleRecording={this.handleRecording}
@@ -304,7 +304,7 @@ export default class DevToolsPanel extends React.Component {
           )}
 
           {this.state.showRequestBody ? (
-            <FullScreenDialog
+            <ApiDetailsDialog
               responseBody={this.state.apiDialogContent["responseBody"]}
               requestBody={this.state.apiDialogContent["requestBody"]}
               closeRequestBody={this.handleCloseRequestBody}
@@ -317,7 +317,7 @@ export default class DevToolsPanel extends React.Component {
           <div className="panel-padding">
             {this.state.apiCalls.map((apiCall) => {
               return (
-                <Panel
+                <ApiEntry
                   id={apiCall["id"]}
                   status={apiCall["status"]}
                   method={apiCall["httpMethod"]}

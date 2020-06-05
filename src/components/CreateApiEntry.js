@@ -1,5 +1,5 @@
 import React from "react";
-import "./CreatePanels.css";
+import "./CreateApiEntry.css";
 import { copy } from "clipboard-js";
 
 import List from "@material-ui/core/List";
@@ -8,7 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 
-export default function Panel({
+export default function ApiEntry({
   id,
   status,
   method,

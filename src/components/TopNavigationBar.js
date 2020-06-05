@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import "./AppBar.css";
+import "./TopNavigationBar.css";
 import rubrikLogo from "../images/rubrikLogo.svg";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HeaderBar({
+export default function TopNavigationBar({
   enableScrollToBottom,
   handlePauseScroll,
   handleRecording,

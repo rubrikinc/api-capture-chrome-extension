@@ -16,7 +16,7 @@ import { Alert } from "@material-ui/lab";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import "./CreatePanels.css";
+import "./CreateApiEntry.css";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -71,7 +71,7 @@ function TabPanel(props) {
   );
 }
 
-export default function FullScreenDialog({
+export default function ApiDetailsDialog({
   responseBody,
   requestBody,
   closeRequestBody,
