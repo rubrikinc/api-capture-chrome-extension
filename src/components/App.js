@@ -1,9 +1,11 @@
 import React from "react";
+// Internal Components
 import TopNavigationBar from "./TopNavigationBar";
 import ApiEntry from "./CreateApiEntry";
 import ApiDetailsDialog from "./ApiDetailsDialog";
+// GraphQL
 import { parse, print } from "graphql";
-
+// Material UI
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./App.css";
