@@ -1,22 +1,22 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// Material UI
 import Dialog from "@material-ui/core/Dialog";
-
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
 import { Alert } from "@material-ui/lab";
-
+// Syntax Highlighting
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-import "./CreatePanels.css";
+import "./CreateApiEntry.css";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -32,12 +32,14 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     height: "40px",
   },
+  apiContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   api: {
-    margin: 0,
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+    paddingTop: "5px",
+    width: "auto",
     fontSize: "1rem",
     fontWeight: 200,
     lineHeight: 1.5,
@@ -69,7 +71,7 @@ function TabPanel(props) {
   );
 }
 
-export default function FullScreenDialog({
+export default function ApiDetailsDialog({
   responseBody,
   requestBody,
   closeRequestBody,
@@ -148,11 +150,13 @@ export default function FullScreenDialog({
           }}
           className={classes.bottomAppBar}
         >
-          <div className={classes.api}>
-            <span className={`requestMethod ${method.toLowerCase()}`}>
-              {method.toUpperCase()}&nbsp;
-            </span>
-            <span class="endpoint">{path}</span>
+          <div className={classes.apiContainer}>
+            <div className={classes.api}>
+              <span className={`requestMethod ${method.toLowerCase()}`}>
+                {method.toUpperCase()}&nbsp;
+              </span>
+              <span class="endpoint">{path}</span>
+            </div>
           </div>
         </AppBar>
       </Dialog>

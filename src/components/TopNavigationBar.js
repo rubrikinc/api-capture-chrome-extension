@@ -1,13 +1,15 @@
 import React from "react";
+import rubrikLogo from "../images/rubrikLogo.svg";
+// Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import "./AppBar.css";
-import rubrikLogo from "../images/rubrikLogo.svg";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+
+import "./TopNavigationBar.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,9 +24,19 @@ const useStyles = makeStyles((theme) => ({
   buttonColor: {
     color: "rgb(105, 115, 134)",
   },
+  appBar: {
+    background: "#fff",
+    borderBottom: "2px solid RGBA(105, 115, 134, 0.2)",
+  },
+  dividerLogoPadding: {
+    paddingRight: "10px",
+  },
+  dividerTextPadding: {
+    paddingLeft: "5px",
+  },
 }));
 
-export default function HeaderBar({
+export default function TopNavigationBar({
   enableScrollToBottom,
   handlePauseScroll,
   handleRecording,
@@ -70,7 +82,7 @@ export default function HeaderBar({
               alt="Rubrik logo"
               src={rubrikLogo}
               width="30"
-              class="divider-logo-padding"
+              className={classes.dividerLogoPadding}
             />
             <Divider orientation="vertical" flexItem />
           </IconButton>

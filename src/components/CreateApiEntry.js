@@ -1,14 +1,16 @@
 import React from "react";
-import "./CreatePanels.css";
-import { copy } from "clipboard-js";
-
-import List from "@material-ui/core/List";
+// Material UI
 import ListItem from "@material-ui/core/ListItem";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+// Copy to Clipboard
+import { copy } from "clipboard-js";
 
-export default function Panel({
+import "./CreateApiEntry.css";
+
+export default function ApiEntry({
   id,
   status,
   method,

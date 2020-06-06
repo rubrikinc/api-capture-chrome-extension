@@ -1,0 +1,5 @@
+@media screen and (max-width: 650px) {
+  .hide-buttons {
+    display: none;
+  }
+}

@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## v1.0.0
+
+- Small UI improvements.
+
 ## v0.4.0 (Final Beta)
 
 - Add a progress bar that is active when waiting for API calls from a Rubrik UI. ([Issue 21](https://github.com/rubrikinc/api-capture-chrome-extension/issues/21))
