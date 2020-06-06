@@ -1,6 +1,6 @@
 {
-  "name": "Rubrik API Capture",
-  "short_name": "Rubrik API Capture",
+  "name": "Rubrik API Code Capture",
+  "short_name": "API Code Capture",
   "description": "Complete a workflow in the Rubrik UI and output the exact APIs used to complete that workflow.",
   "author": "Drew Russell <@drusse11>",
   "version": "1.0.0",
