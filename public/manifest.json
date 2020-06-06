@@ -1,7 +1,7 @@
 {
   "name": "Rubrik API Capture",
   "short_name": "Rubrik API Capture",
-  "description": "Allows you to complete a workflow in the Rubrik UI and output the exact APIs, along with their response and request bodies, used to complete that workflow.",
+  "description": "Complete a workflow in the Rubrik UI and output the exact APIs, along with their response and request bodies, used to complete that workflow.",
   "author": "Drew Russell <@drusse11>",
   "version": "1.0.0",
   "manifest_version": 2,
