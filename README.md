@@ -12,16 +12,6 @@ The extension captures the API calls that both Rubrik CDM and Polaris UIs issue 
 
 The extension can be installed through the [Chrome Web Store](https://chrome.google.com/webstore/detail/rubrik-api-code-capture/mobibinbefmieblpnhabghboblgamkbj)
 
-# Rubrik API Capture Chrome Extension
-
-![Main API UI](./images/01_Rubrik_ChromeStoreAppScreenshots_1280x800_20200605_v1.png)
-
-# :hammer: Installation
-
-The extension can be installed through the [Chrome Web Store](https://chrome.google.com/webstore/detail/rubrik-api-code-capture/mobibinbefmieblpnhabghboblgamkbj)
-
-![Chrome Web Store](https://user-images.githubusercontent.com/8610203/84167850-58a21b80-aa3c-11ea-9d07-c9bc93069a1b.png)
-
 # :blue_book: Documentation
 
 # :muscle: How You Can Help
