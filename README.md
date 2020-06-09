@@ -1,22 +1,26 @@
+# Rubrik API Capture Extension 
+
+At the heart of the Rubrik API-first architecture is the fact that every action in the Rubrik UI has a corresponding API that is documented and available for use. Or in other words, if you can do it through the Rubrik UI, you can programmatically do the same through an API. While each of those APIs are fully documented, it can still be cumbersome to search through the API documentation to find the APIs you need and then determine which information you need to send with those API calls. This is where the API Code Capture extension comes into play.
+
+The extension captures the API calls that both Rubrik CDM and Polaris UIs issue to their underlying platforms. By opening the extension and monitoring which API calls are used when you manually complete that task in the UI, you can easily answer the question “how do I automate X task?”
+
+![Main API UI](https://user-images.githubusercontent.com/8610203/82976605-2527b180-9fa5-11ea-8826-9d5f6ee20315.png)
+
+![Response Body](https://user-images.githubusercontent.com/8610203/84167807-4aec9600-aa3c-11ea-80ec-1fec4b0e0c15.png)
+
+# :hammer: Installation
+
+The extension can be installed through the [Chrome Web Store](https://chrome.google.com/webstore/detail/rubrik-api-code-capture/mobibinbefmieblpnhabghboblgamkbj)
+
 # Rubrik API Capture Chrome Extension
 
 ![Main API UI](./images/01_Rubrik_ChromeStoreAppScreenshots_1280x800_20200605_v1.png)
 
 # :hammer: Installation
 
-## Download the Extension
+The extension can be installed through the [Chrome Web Store](https://chrome.google.com/webstore/detail/rubrik-api-code-capture/mobibinbefmieblpnhabghboblgamkbj)
 
-* Download the `rubrik-api-capture.zip` asset from the [Releases](https://github.com/rubrikinc/api-capture-chrome-extension/releases/latest) page
-* Unzip `rubrik-api-capture.zip`
-
-## Load the Extension in Chrome
-
-1. In Chrome, Browse to `chrome://extensions`
-2. Toggle Developer Mode (top right)
-3. Select the `Load unpacked` button
-4. Select the `rubrik-api-capture` directory
-
-You will now have a `Rubrik` tab in the Chrome DevToos.
+![Chrome Web Store](https://user-images.githubusercontent.com/8610203/84167850-58a21b80-aa3c-11ea-9d07-c9bc93069a1b.png)
 
 # :blue_book: Documentation
 

@@ -66,6 +66,14 @@
   color: #815ae0;
 }
 
+.put {
+  color: #ffc2c7;
+}
+
+.patch {
+  color: #fcc827;
+}
+
 /*     API Endpoint     */
 /* ******************* */
 
