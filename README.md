@@ -1,4 +1,4 @@
-# Rubrik API Capture Extension 
+# Rubrik API Code Capture Extension 
 
 ![Main API UI](./images/01_Rubrik_ChromeStoreAppScreenshots_1280x800_20200605_v1.png)
 
