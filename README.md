@@ -4,7 +4,7 @@ At the heart of the Rubrik API-first architecture is the fact that every action 
 
 The extension captures the API calls that both Rubrik CDM and Polaris UIs issue to their underlying platforms. By opening the extension and monitoring which API calls are used when you manually complete that task in the UI, you can easily answer the question “how do I automate X task?”
 
-![Main API UI](https://user-images.githubusercontent.com/8610203/82976605-2527b180-9fa5-11ea-8826-9d5f6ee20315.png)
+![Main API UI](./images/01_Rubrik_ChromeStoreAppScreenshots_1280x800_20200605_v1.png)
 
 ![Response Body](https://user-images.githubusercontent.com/8610203/84167807-4aec9600-aa3c-11ea-80ec-1fec4b0e0c15.png)
 
