@@ -1,12 +1,12 @@
 # Rubrik API Capture Extension 
 
+![Main API UI](./images/01_Rubrik_ChromeStoreAppScreenshots_1280x800_20200605_v1.png)
+
+
 At the heart of the Rubrik API-first architecture is the fact that every action in the Rubrik UI has a corresponding API that is documented and available for use. Or in other words, if you can do it through the Rubrik UI, you can programmatically do the same through an API. While each of those APIs are fully documented, it can still be cumbersome to search through the API documentation to find the APIs you need and then determine which information you need to send with those API calls. This is where the API Code Capture extension comes into play.
 
 The extension captures the API calls that both Rubrik CDM and Polaris UIs issue to their underlying platforms. By opening the extension and monitoring which API calls are used when you manually complete that task in the UI, you can easily answer the question “how do I automate X task?”
 
-![Main API UI](./images/01_Rubrik_ChromeStoreAppScreenshots_1280x800_20200605_v1.png)
-
-![Response Body](https://user-images.githubusercontent.com/8610203/84167807-4aec9600-aa3c-11ea-80ec-1fec4b0e0c15.png)
 
 # :hammer: Installation
 
