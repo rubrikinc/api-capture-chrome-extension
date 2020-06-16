@@ -14,8 +14,9 @@ The extension can be installed through the [Chrome Web Store](https://chrome.goo
 
 ![Chrome Web Store](https://user-images.githubusercontent.com/8610203/84167850-58a21b80-aa3c-11ea-9d07-c9bc93069a1b.png)
 
-
 # :blue_book: Documentation
+
+After installation, you can view the extension by accessing the Chrome DevTools. There are several ways of [doing this](https://developers.google.com/web/tools/chrome-devtools/open) -- the simplest of which is to right-click anywhere on the screen and then select Inspect. Once in the DevTools, you will then need to select the Rubrik tab.
 
 # :muscle: How You Can Help
 
