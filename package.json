@@ -1,5 +1,5 @@
 {
-  "name": "api-capture-chrome-extension",
+  "name": "api-code-capture-chrome-extension",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
