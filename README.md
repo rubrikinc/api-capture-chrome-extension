@@ -10,7 +10,7 @@ The extension captures the API calls that both Rubrik CDM and Polaris UIs issue 
 
 # :blue_book: Documentation
 
-After installation, you can view the extension by accessing the Chrome DevTools. There are several ways of [doing this](https://developers.google.com/web/tools/chrome-devtools/open) -- the simplest of which is to right-click anywhere on the screen and then select Inspect. Once in the DevTools, you will then need to select the Rubrik tab.
+[Technical White Paper (RWP-0558)](/docs/RWP-0558.pdf)
 
 # :muscle: How You Can Help
 
