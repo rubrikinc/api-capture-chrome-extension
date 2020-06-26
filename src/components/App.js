@@ -167,9 +167,14 @@ export default class App extends React.Component {
               ? (httpMethod = "mutation")
               : (httpMethod = "query");
           }
-          // Convert the request data to a GraphQL AST document for easier
-          // processing
-          let ast = parse(JSON.parse(request.request.postData.text)["query"]);
+          // Remove any instances of "__typename" and then convert the request
+          // data to a GraphQL AST document for easier processing
+          let ast = parse(
+            JSON.parse(request.request.postData.text)["query"].replace(
+              /__typename/g,
+              ""
+            )
+          );
           try {
             path = ast["definitions"][0]["name"]["value"];
           } catch (error) {}
