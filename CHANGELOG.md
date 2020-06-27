@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+
+- GraphQL queries will no longer show the "__typename" field in the request and response bodies ([Issue 20](https://github.com/rubrikinc/api-capture-chrome-extension/issues/20))
+
 ## v1.0.0
 
 - Small UI improvements.

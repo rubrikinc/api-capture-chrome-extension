@@ -53,6 +53,9 @@ const combinedBackgroundApiCalls = [
   ...polarisBackgroundApiCalls,
 ];
 
+// Create a blank string used to remove __type from the GQL response body
+let processedGQLResponse = "";
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -167,9 +170,14 @@ export default class App extends React.Component {
               ? (httpMethod = "mutation")
               : (httpMethod = "query");
           }
-          // Convert the request data to a GraphQL AST document for easier
-          // processing
-          let ast = parse(JSON.parse(request.request.postData.text)["query"]);
+          // Remove any instances of "__typename" and then convert the request
+          // data to a GraphQL AST document for easier processing
+          let ast = parse(
+            JSON.parse(request.request.postData.text)["query"].replace(
+              /__typename/g,
+              ""
+            )
+          );
           try {
             path = ast["definitions"][0]["name"]["value"];
           } catch (error) {}
@@ -198,7 +206,41 @@ export default class App extends React.Component {
       // and is not in the shouldBeFilterd list
       if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
         try {
-          request.getContent((content, encoding) => {
+          request.getContent((content) => {
+            // If present, remove "__typename from the response body"
+            if (content.includes("__typename")) {
+              // Split the string on each instance of "__typename" (i.e the key) and
+              // then remove the value for the typename
+              content.split(`"__typename":"`).forEach((item) => {
+                // Add the first line in the array
+                if (item.charAt(0) === "{") {
+                  processedGQLResponse += item;
+                } else {
+                  // Example line we are processing:
+                  //    Cluster","criticalSeverity":{
+                  //
+                  // where Cluster = the typename key that needs to be removed
+                  //
+                  // Find all occurances of "," in the string
+                  // splitIndex gives us the first instance of "," which
+                  // tells where we need to split the string to remove the
+                  // typename key
+                  let splitIndex = item.indexOf(",");
+                  // Create a new array that has the typename key as the first
+                  // value
+                  let typenameKey = [
+                    item.slice(0, splitIndex),
+                    item.slice(splitIndex + 1),
+                  ];
+                  // Remove the typenameKey from the array
+                  typenameKey.shift();
+                  processedGQLResponse += typenameKey;
+                }
+              });
+              content = processedGQLResponse;
+              processedGQLResponse = "";
+            }
+
             this.setState({
               apiCalls: [
                 ...this.state.apiCalls,
