@@ -84,15 +84,15 @@ export default function TopNavigationBar({
               width="30"
               className={classes.dividerLogoPadding}
             />
-            <Divider orientation="vertical" flexItem />
-          </IconButton>
+            <Divider orientation="vertical" flexitem="true" /> {/* Change `flexItem` to `flexitem` */}
+            </IconButton>
           <Typography className={classes.title} style={{ color: "#697386" }}>
             API Code Capture
           </Typography>
-          <div class="hide-buttons">
+          <div className="hide-buttons">
             <Button
               size="small"
-              style={{ color: "rgb(105, 115, 134)", "margin-right": "30px" }}
+              style={{ color: "rgb(105, 115, 134)", "marginRight": "30px" }}
               onClick={handleRecordingButton}
             >
               {`${localRecordingState} Recording`}

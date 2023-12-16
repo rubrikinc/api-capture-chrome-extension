@@ -206,8 +206,7 @@ export default class App extends React.Component {
             try {
               parsedContent = JSON.parse(content);
             } catch (error) {
-              console.log("Failed to parse endpoint response: ", error.message);
-              // Handle parsing error
+              // console.log("Failed to parse endpoint response: ", error.message);
               parsedContent = content;
             }
 
@@ -349,6 +348,7 @@ export default class App extends React.Component {
               return (
                 <ApiEntry
                   id={apiCall["id"]}
+                  key={apiCall["id"]}
                   status={apiCall["status"]}
                   method={apiCall["httpMethod"]}
                   path={apiCall["path"]}
