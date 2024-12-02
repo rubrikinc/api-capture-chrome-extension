@@ -39,7 +39,9 @@
   "overrides": {
     "react-scripts": {
        "postcss": "8.4.49",
-       "svgo":"3.3.2"
+       "@svgr/webpack": "8.1.0",
+       "workbox-webpack-plugin":"7.3.0"
       }
+  }
 }
-}
+
