@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **Security** in case of vulnerabilities.
 
 ## Unreleased
+## v1.1.0
+
+- vulnerability-fix.
+- React Upgrade
+- Manifest Upgrade
 
 ## v1.0.0
 
