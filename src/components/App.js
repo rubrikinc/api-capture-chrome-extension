@@ -181,6 +181,7 @@ export default class App extends React.Component {
 
           // Store the GraphQL request variables
           try {
+
             requestVariables = JSON.parse(request.request.postData.text)[
               "variables"
             ];
@@ -199,6 +200,17 @@ export default class App extends React.Component {
       if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
         try {
           request.getContent((content, encoding) => {
+
+            let parsedContent;
+
+            try {
+              parsedContent = JSON.parse(content);
+            } catch (error) {
+              console.log("Failed to parse endpoint response: ", error.message);
+              // Handle parsing error
+              parsedContent = content;
+            }
+
             this.setState({
               apiCalls: [
                 ...this.state.apiCalls,
@@ -208,7 +220,7 @@ export default class App extends React.Component {
                   httpMethod: httpMethod,
                   path: path,
                   responseTime: request.time,
-                  responseBody: JSON.parse(content),
+                  responseBody: parsedContent,
                   requestBody: requestBody,
                   requestVariables: requestVariables,
                 },
