@@ -49,8 +49,8 @@ export default function ApiEntry({
     >
       <List
         component="nav"
-        dense={true}
-        class={
+        dense="true"
+        className={
           httpSuccessCodes.includes(status)
             ? "list-border-success list-spacing"
             : "list-border-error list-spacing"
@@ -74,7 +74,7 @@ export default function ApiEntry({
           ) : null}
 
           <ListItem
-            button
+            button="true"
             onClick={handleClick(
               id,
               responseBody,
@@ -84,12 +84,12 @@ export default function ApiEntry({
               path
             )}
           >
-            <div class="list-container list-spacing">
+            <div className="list-container list-spacing">
               <div className={`requestMethod ${method.toLowerCase()}`}>
                 {method}
               </div>
-              <div class="endpoint">{path}</div>
-              <div class="responseTime">{Math.round(responseTime)}ms</div>
+              <div className="endpoint">{path}</div>
+              <div className="responseTime">{Math.round(responseTime)}ms</div>
             </div>
           </ListItem>
         </div>

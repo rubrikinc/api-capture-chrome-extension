@@ -3,13 +3,19 @@
   "short_name": "API Code Capture",
   "description": "Complete a workflow in the Rubrik UI and output the exact APIs used to complete that workflow.",
   "author": "Drew Russell <@drusse11>",
-  "version": "1.0.0",
-  "manifest_version": 2,
-  "minimum_chrome_version": "43",
+  "version": "1.1.0",
+  "manifest_version": 3,
+  "minimum_chrome_version": "88",
   "devtools_page": "index.html",
+  "background": {
+    "service_worker": "background.js"
+  },
   "icons": {
     "16": "favicon.ico",
     "48": "logo192.png",
     "128": "logo512.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline';"
   }
 }

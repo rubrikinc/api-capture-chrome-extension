@@ -153,8 +153,12 @@ export default class App extends React.Component {
 
       // Process the request body of of the API call
       if (request.request.bodySize !== 0) {
+        try {
         let requestBodyJSON = JSON.parse(request.request.postData.text);
         requestBody = JSON.stringify(requestBodyJSON, null, 2);
+      } catch (error) {
+        requestBody = "null";
+      }
       } else {
         requestBody = "null";
       }
@@ -163,12 +167,17 @@ export default class App extends React.Component {
         if (path.includes("graphql")) {
           // override the default POST http method with either mutation or query
           if (request.request.bodySize !== 0) {
-            request.request.postData.text.includes("mutation")
-              ? (httpMethod = "mutation")
-              : (httpMethod = "query");
+            try {
+              request.request.postData.text.includes("mutation")
+                ? (httpMethod = "mutation")
+                : (httpMethod = "query");
+            } catch (error) {
+              httpMethod = "query";
+            }
           }
           // Convert the request data to a GraphQL AST document for easier
           // processing
+          try {
           let ast = parse(JSON.parse(request.request.postData.text)["query"]);
           try {
             path = ast["definitions"][0]["name"]["value"];
@@ -178,9 +187,10 @@ export default class App extends React.Component {
             // pretty print the AST document
             requestBody = print(ast);
           } catch (error) {}
-
+        } catch (error) {}
           // Store the GraphQL request variables
           try {
+
             requestVariables = JSON.parse(request.request.postData.text)[
               "variables"
             ];
@@ -199,6 +209,16 @@ export default class App extends React.Component {
       if (isRubrikApiCall && !this.shouldBeFilterd(path)) {
         try {
           request.getContent((content, encoding) => {
+
+            let parsedContent;
+
+            try {
+              parsedContent = JSON.parse(content);
+            } catch (error) {
+              // console.log("Failed to parse endpoint response: ", error.message);
+              parsedContent = content;
+            }
+
             this.setState({
               apiCalls: [
                 ...this.state.apiCalls,
@@ -208,7 +228,7 @@ export default class App extends React.Component {
                   httpMethod: httpMethod,
                   path: path,
                   responseTime: request.time,
-                  responseBody: JSON.parse(content),
+                  responseBody: parsedContent,
                   requestBody: requestBody,
                   requestVariables: requestVariables,
                 },
@@ -337,6 +357,7 @@ export default class App extends React.Component {
               return (
                 <ApiEntry
                   id={apiCall["id"]}
+                  key={apiCall["id"]}
                   status={apiCall["status"]}
                   method={apiCall["httpMethod"]}
                   path={apiCall["path"]}
