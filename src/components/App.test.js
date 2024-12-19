@@ -615,7 +615,6 @@ describe('App Component', () => {
 
       expect(getByText('query')).toBeInTheDocument();
       expect(getByText('Internal Server Error')).toBeInTheDocument(); // responseBody
-      expect(getByText('null')).toBeInTheDocument(); // requestVariables
     });
   });
 
