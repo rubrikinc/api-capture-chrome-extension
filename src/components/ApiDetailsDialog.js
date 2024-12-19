@@ -48,11 +48,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+export const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function TabPanel(props) {
+export function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
@@ -155,7 +155,7 @@ export default function ApiDetailsDialog({
               <span className={`requestMethod ${method.toLowerCase()}`}>
                 {method.toUpperCase()}&nbsp;
               </span>
-              <span class="endpoint">{path}</span>
+              <span className="endpoint">{path}</span>
             </div>
           </div>
         </AppBar>
