@@ -38,12 +38,13 @@
   },
   "overrides": {
     "react-scripts": {
-       "postcss": "8.4.49",
-       "@svgr/webpack": "8.1.0",
-       "workbox-webpack-plugin": "7.3.0"
+      "postcss": "8.4.49",
+      "@svgr/webpack": "8.1.0",
+      "workbox-webpack-plugin": "7.3.0"
     }
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/dom": "^8.20.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^12.1.5",
